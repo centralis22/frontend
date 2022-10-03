@@ -1,7 +1,7 @@
 import React from 'react';
 import SignIn from '../components/SignIn';
 
-function HomePage() {
+function LoginPage() {
   return (
     <div>
       <SignIn />
@@ -9,4 +9,4 @@ function HomePage() {
   );
 }
 
-export default HomePage
+export default LoginPage;
