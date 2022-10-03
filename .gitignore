@@ -27,6 +27,8 @@ yarn-error.log*
 .next/static/webpack/*hot-update.js
 .next/static/webpack/pages/*hot-update.json
 .next/static/webpack/pages/*hot-update.js
-.next/server/_error.js
 .next/static/chunks/_error.js
+.next/static/chunks/webpack.js
+.next/server/_error.js
 .next/cache/webpack/*
+.next/trace
