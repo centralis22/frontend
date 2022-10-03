@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore .next files
+.next/static/webpack/*hot-update.json
+.next/static/webpack/*hot-update.js
+.next/static/webpack/pages/*hot-update.json
+.next/static/webpack/pages/*hot-update.js
+.next/server/_error.js
+.next/static/chunks/_error.js
+.next/cache/webpack/*
