@@ -3,6 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -11,6 +13,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import * as SockJS from "sockjs-client";
 
+//Initialized socket
 var sock = new SockJS("http://localhost:8080/api");
 
 sock.onopen = function () {
@@ -28,6 +31,7 @@ sock.onclose = function () {
 
 const theme = createTheme();
 
+//Class function starts here
 export default function SignUp() {
   const [create, setCreate] = React.useState({
     username: "",
@@ -66,9 +70,27 @@ export default function SignUp() {
     });
   }
 
-  function handleCreateSession() {
-    
-    console.log("Create Session");
+  function handleCreateSession(event) {
+    event.preventDefault();
+
+    var sendobj = {
+      request_id: 4871,
+      request: "create_session",
+      content: {
+        user_type: "admin",
+        user_name: create.roomName,
+        user_pswd: create.password,
+        session_id: create.sessionID,
+      },
+    };
+
+    sock.send(JSON.stringify(sendobj));
+
+    setCreate({
+      username: "",
+      password: "",
+      sessionID: "",
+    });
   }
 
   return (
@@ -95,11 +117,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Instructor Sign In
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -151,6 +169,13 @@ export default function SignUp() {
             >
               Create Session
             </Button>
+            <Grid container>
+              <Grid item>
+                <Link href="/" variant="body2">
+                  {"Not an instructor? Click here"}
+                </Link>
+              </Grid>
+            </Grid>
           </Box>
         </Box>
       </Container>
