@@ -30,15 +30,19 @@ export default function SignIn() {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
+      
       router.push("/introduction");
     } else {
+      
       alert("Login failed");
       isCorrect = false;
     }
   };
 
   useEffect(() => {
-    
+    if(!isCorrect) {
+      
+    }
   }, [isCorrect]);
 
   const [create, setCreate] = React.useState({

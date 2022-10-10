@@ -18,10 +18,6 @@ import * as SockJS from "sockjs-client";
 //Initialized socket
 var sock = new SockJS("http://localhost:8080/api");
 
-sock.onmessage = function (e) {
-  
-};
-
 const theme = createTheme();
 
 //Class function starts here
