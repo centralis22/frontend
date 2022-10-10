@@ -49,7 +49,8 @@ export default function SignIn() {
     event.preventDefault();
 
     var sendobj = {
-      request: "4869",
+      request_id: 4869,
+      request: "login",
       content: {
         user_type: "student",
         user_name: create.roomName,

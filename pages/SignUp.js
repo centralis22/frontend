@@ -47,7 +47,8 @@ export default function SignUp() {
     event.preventDefault();
 
     var sendobj = {
-      request: "20221021",
+      request_id: 4870,
+      request: "login",
       content: {
         user_type: "admin",
         user_name: create.roomName,
