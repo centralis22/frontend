@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useRouter } from "next/router";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -24,6 +26,37 @@ const theme = createTheme();
 
 //Class function starts here
 export default function SignUp() {
+  var router = useRouter();
+
+  sock.onmessage = function (e) {
+    var parsedData = JSON.parse(e.data);
+
+    if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
+      
+      router.push("/introduction");
+    } 
+    
+    else if (parsedData.respond_id === 4871 && parsedData.status_code === 200) {
+      
+      alert("Your new session ID is: " + parsedData.content);
+
+      router.push("/introduction");
+    }
+    
+    else if ((parsedData.respond_id === 4870 || parsedData.respond_id === 4871) && parsedData.status_code === 403) {
+      
+      alert("Wrong login credentials given, please try again.");
+    } 
+    
+    else if (parsedData.respond_id === 4870 && parsedData.status_code === 400) {
+
+      alert("Joined a session that does not exist.");
+    } else {
+
+      alert("Login failed");
+    }
+  };
+
   const [create, setCreate] = React.useState({
     username: "",
     password: "",
