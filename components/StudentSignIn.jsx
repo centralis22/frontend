@@ -1,13 +1,12 @@
 import * as React from "react";
-import { useEffect } from 'react';
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -20,11 +19,11 @@ import * as SockJS from "sockjs-client";
 const theme = createTheme();
 
 var sock = new SockJS("http://localhost:8080/api");
+var isCorrect = true;
 
 //Class function starts here
 export default function SignIn() {
   var router = useRouter();
-  var isCorrect = true;
 
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
@@ -38,12 +37,6 @@ export default function SignIn() {
       isCorrect = false;
     }
   };
-
-  useEffect(() => {
-    if(!isCorrect) {
-      
-    }
-  }, [isCorrect]);
 
   const [create, setCreate] = React.useState({
     sessionID: "",
@@ -132,11 +125,11 @@ export default function SignIn() {
               onChange={saveText}
             />
             <div>
-              {isCorrect ? null : (
+              {isCorrect ? null : 
                 <span className="loginError">
                   Please enter a valid session ID and room name
                 </span>
-              )}
+              }
             </div>
             <Button
               onClick={handleJoinRoom}
