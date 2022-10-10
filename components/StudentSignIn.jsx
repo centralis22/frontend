@@ -20,15 +20,6 @@ const theme = createTheme();
 
 var sock = new SockJS("http://localhost:8080/api");
 
-sock.onopen = function () {
-  console.log("open");
-  sock.send("test");
-};
-
-sock.onclose = function () {
-  console.log("close");
-};
-
 //Class function starts here
 export default function SignIn() {
   var router = useRouter();
