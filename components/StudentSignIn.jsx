@@ -1,4 +1,7 @@
 import * as React from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,7 +13,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Head from "next/head";
 
 import * as SockJS from "sockjs-client";
 
@@ -23,15 +25,26 @@ sock.onopen = function () {
   sock.send("test");
 };
 
-sock.onmessage = function (e) {
-  console.log("message", e.data);
-};
-
 sock.onclose = function () {
   console.log("close");
 };
 
+//Class function starts here
 export default function SignIn() {
+  var router = useRouter();
+  var isCorrect = true;
+
+  sock.onmessage = function (e) {
+    var parsedData = JSON.parse(e.data);
+
+    if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
+      router.push("/introduction");
+    } else {
+      alert("Login failed");
+      isCorrect = false;
+    }
+  };
+
   const [create, setCreate] = React.useState({
     sessionID: "",
     roomName: "",
@@ -45,6 +58,7 @@ export default function SignIn() {
     });
   }
 
+  //When Join Button clicked
   function handleJoinRoom(event) {
     event.preventDefault();
 
@@ -117,6 +131,13 @@ export default function SignIn() {
               value={create.roomName}
               onChange={saveText}
             />
+            <div>
+              {isCorrect ? null : (
+                <span className="loginError">
+                  Please enter a valid session ID and room name
+                </span>
+              )}
+            </div>
             <Button
               onClick={handleJoinRoom}
               type="submit"
