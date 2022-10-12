@@ -2,6 +2,7 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import sock from "../config/socket";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,16 +15,18 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import * as SockJS from "sockjs-client";
-
 const theme = createTheme();
 
-var sock = new SockJS("http://localhost:8080/api");
 var isCorrect = true;
 
 //Class function starts here
 export default function SignIn() {
   var router = useRouter();
+
+  sock.open = function (e) {
+
+    console.log("Connection established!");
+  };
 
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
@@ -77,7 +80,7 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={theme}>
       <Head>
-        <title>Centralis</title>
+        <title>Centralis Student SignIn</title>
       </Head>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -142,7 +145,7 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/signUp" variant="body2">
+                <Link href="/signUp">
                   {"Not a student? Click here"}
                 </Link>
               </Grid>
