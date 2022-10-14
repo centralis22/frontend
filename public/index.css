@@ -57,7 +57,7 @@ body {
   padding-top: 20px;
 }
 
-.dashboard .button {
+.dashboard .button, .ProgressLink {
   display: block;
   outline: 0;
   margin-bottom: 8px;

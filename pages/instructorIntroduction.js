@@ -14,7 +14,7 @@ export default function InstructorIntroduction() {
         <title>Welcome</title>
       </Head>
       <div>Welcome to the welcome page!</div>
-      <GameNextStepButton PageLink="/survey1"/>
+      <GameNextStepButton PageLink="/instructorSurvey1"/>
     </InstructorLayout>
   );
 }

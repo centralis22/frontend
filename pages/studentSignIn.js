@@ -24,17 +24,16 @@ var isCorrect = true;
 export default function StudentSignIn() {
   var router = useRouter();
 
-  sock.open = function (e) {
-
-    console.log("Connection established!");
-  };
-
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
       
-      router.push("/instructorIntroduction");
+      router.push("/studentIntroduction");
+      router.push({
+        pathname: "/studentIntroduction",
+        query: { sessionID: create.sessionID }
+      });
     } else {
       
       alert("Login failed");

@@ -29,7 +29,7 @@ export default function InstructorSignUp() {
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: create.sessionID },
+        query: { sessionID: create.sessionID }
       });
 
     } else if (

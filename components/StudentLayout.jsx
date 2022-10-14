@@ -1,11 +1,11 @@
-import Dashboard from "./InstructorDashboard";
+import StudentDashboard from './StudentDashboard';
 import Banner from "./Banner";
 
-function StudentLayout({ children, SessionID }) {
+function StudentLayout({ children, SessionID, CurrentPage}) {
   return (
     <div>
       <Banner UserType="Student" SessionID={SessionID} Session={true}/>
-      <Dashboard/>
+      <StudentDashboard CurrentPage={CurrentPage}/>
       <div className="main">{children}</div>
     </div>
   );
