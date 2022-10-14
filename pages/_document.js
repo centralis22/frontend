@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
           <meta name="description" content="My SEO React app with Next JS" />
           <meta name="keywords" content="next react seo" />
           <meta name="author" content="William Hu" />
-          <link rel="stylesheet" href="/static/index.css" />
+          <link rel="stylesheet" href="/index.css" />
           <Script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js" strategy="beforeInteractive"></Script>
         </Head>
 
