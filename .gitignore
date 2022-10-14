@@ -32,3 +32,4 @@ yarn-error.log*
 .next/server/_error.js
 .next/cache/webpack/*
 .next/trace
+.next/cache
