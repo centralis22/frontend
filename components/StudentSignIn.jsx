@@ -1,8 +1,9 @@
-import * as React from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import sock from "../config/socket";
+import Banner from "../components/Banner";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -20,7 +21,7 @@ const theme = createTheme();
 var isCorrect = true;
 
 //Class function starts here
-export default function SignIn() {
+export default function StudentSignIn() {
   var router = useRouter();
 
   sock.open = function (e) {
@@ -82,11 +83,12 @@ export default function SignIn() {
       <Head>
         <title>Centralis Student SignIn</title>
       </Head>
+      <Banner UserType="Student" SessionID="" Session={false}/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",

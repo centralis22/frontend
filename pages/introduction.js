@@ -1,9 +1,20 @@
-import React from 'react';
+import React from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
+
+import InstructorLayout from "../components/InstructorLayout";
+import GameNextStepButton from "../components/GameNextStepButton";
 
 export default function Intruduction() {
+  const router = useRouter();
+
   return (
-    <div>
-      Welcome!
-    </div>
+    <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Welcome">
+      <Head>
+        <title>Welcome</title>
+      </Head>
+      <div>Welcome to the welcome page!</div>
+      <GameNextStepButton PageLink="/survey1"/>
+    </InstructorLayout>
   );
 }

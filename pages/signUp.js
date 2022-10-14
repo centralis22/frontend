@@ -1,8 +1,9 @@
-import * as React from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import sock from "../config/socket";
+import Banner from "../components/Banner";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -24,15 +25,24 @@ export default function SignUp() {
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
+    //Push user to the existed session
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
-      router.push("/introduction");
+      router.push({
+        pathname: "/introduction",
+        query: { sessionID: create.sessionID },
+      });
+
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200
     ) {
+      //Push user to the newly created random session
       alert("Your new session ID is: " + parsedData.content);
 
-      router.push("/introduction");
+      router.push({
+        pathname: "/introduction",
+        query: { sessionID: parsedData.content },
+      });
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
       parsedData.status_code === 403
@@ -113,11 +123,12 @@ export default function SignUp() {
       <Head>
         <title>Centralis Instructor SignIn</title>
       </Head>
+      <Banner UserType="Instructor" SessionID="" Session={false}/>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -189,9 +200,7 @@ export default function SignUp() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="/">
-                  {"Not an instructor? Click here"}
-                </Link>
+                <Link href="/">{"Not an instructor? Click here"}</Link>
               </Grid>
             </Grid>
           </Box>
