@@ -1,4 +1,4 @@
-import Dashboard from "./Dashboard";
+import Dashboard from "./InstructorDashboard";
 import Banner from "./Banner";
 
 function InstructorLayout({ children, sessionID, CurrentPage }) {

@@ -34,7 +34,7 @@ export default function StudentSignIn() {
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
       
-      router.push("/introduction");
+      router.push("/instructorIntroduction");
     } else {
       
       alert("Login failed");

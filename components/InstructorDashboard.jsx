@@ -1,7 +1,7 @@
 import React from "react";
 import DashLink from "./DashLink";
 
-function Dashboard(props) {
+function InstructorDashboard(props) {
   return (
     <div className="dashboard" alt="dashboard">
       <h1 style={{ marginBottom: "20px"}}>
@@ -15,4 +15,4 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+export default InstructorDashboard;

@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import InstructorLayout from "../components/InstructorLayout";
 
-export default function Results() {
+export default function InstructorResults() {
   return (
     <InstructorLayout CurrentPage="Results">
       <Head>

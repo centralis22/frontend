@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 //Class function starts here
-export default function SignUp() {
+export default function InstructorSignUp() {
   var router = useRouter();
 
   sock.onmessage = function (e) {
@@ -28,7 +28,7 @@ export default function SignUp() {
     //Push user to the existed session
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
-        pathname: "/introduction",
+        pathname: "/instructorIntroduction",
         query: { sessionID: create.sessionID },
       });
 
@@ -40,7 +40,7 @@ export default function SignUp() {
       alert("Your new session ID is: " + parsedData.content);
 
       router.push({
-        pathname: "/introduction",
+        pathname: "/instructorIntroduction",
         query: { sessionID: parsedData.content },
       });
     } else if (

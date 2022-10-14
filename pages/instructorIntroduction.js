@@ -5,7 +5,7 @@ import Head from "next/head";
 import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
 
-export default function Intruduction() {
+export default function InstructorIntroduction() {
   const router = useRouter();
 
   return (
