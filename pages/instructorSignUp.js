@@ -103,7 +103,7 @@ export default function InstructorSignUp() {
       request: "create_session",
       content: {
         user_type: "admin",
-        user_name: create.roomName,
+        user_name: create.username,
         user_pswd: create.password,
         session_id: create.sessionID,
       },
