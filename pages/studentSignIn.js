@@ -34,12 +34,18 @@ export default function StudentSignIn() {
         pathname: "/studentIntroduction",
         query: { sessionID: create.sessionID }
       });
+
+      isCorrect = true;
     } else {
       
       alert("Login failed");
       isCorrect = false;
     }
   };
+
+  React.useEffect(() => {
+   
+  }, [isCorrect]);
 
   const [create, setCreate] = React.useState({
     sessionID: "",

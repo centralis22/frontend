@@ -80,7 +80,7 @@ export default function InstructorSignUp() {
       request: "login",
       content: {
         user_type: "admin",
-        user_name: create.roomName,
+        user_name: create.username,
         user_pswd: create.password,
         session_id: create.sessionID,
       },

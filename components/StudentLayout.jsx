@@ -1,10 +1,10 @@
 import StudentDashboard from './StudentDashboard';
 import Banner from "./Banner";
 
-function StudentLayout({ children, SessionID, CurrentPage}) {
+function StudentLayout({ children, sessionID, CurrentPage}) {
   return (
     <div>
-      <Banner UserType="Student" SessionID={SessionID} Session={true}/>
+      <Banner UserType="Student" SessionID={sessionID} Session={true}/>
       <StudentDashboard CurrentPage={CurrentPage}/>
       <div className="main">{children}</div>
     </div>
