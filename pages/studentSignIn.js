@@ -17,8 +17,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
-
 var isCorrect = true;
+var tempSession = "";
 
 //Class function starts here
 export default function StudentSignIn() {
@@ -28,25 +28,20 @@ export default function StudentSignIn() {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
-      
-      router.push("/studentIntroduction");
       router.push({
         pathname: "/studentIntroduction",
-        query: { sessionID: create.sessionID }
+        query: { sessionID: tempSession },
       });
 
-      isCorrect = true;
+      setState(true);
     } else {
       
       alert("Login failed");
-      isCorrect = false;
+      setState(false);
     }
   };
 
-  React.useEffect(() => {
-   
-  }, [isCorrect]);
-
+  const [isState, setState] = React.useState(isCorrect);
   const [create, setCreate] = React.useState({
     sessionID: "",
     roomName: "",
@@ -63,6 +58,8 @@ export default function StudentSignIn() {
   //When Join Button clicked
   function handleJoinRoom(event) {
     event.preventDefault();
+
+    tempSession = create.sessionID;
 
     var sendobj = {
       request_id: 4869,
@@ -135,7 +132,7 @@ export default function StudentSignIn() {
               onChange={saveText}
             />
             <div>
-              {isCorrect ? null : 
+              {isState ? null : 
                 <span className="loginError">
                   Please enter a valid session ID and room name
                 </span>

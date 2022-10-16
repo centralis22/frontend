@@ -84,3 +84,24 @@ body {
     color: rgb(255, 255, 0);
     background-color: #9a2323;
 }
+
+.LogoutButtonDiv {
+  margin-right: 30px;
+  position: absolute;
+  right: 0;
+}
+
+.LogoutButton {
+  background-color: #850000;
+  color: white;
+  font-size: 18px;
+  width: 130px;
+  height: 40px;
+  border-color: black;
+  border-radius: 5px;
+}
+
+.LogoutButton:hover {
+    color: rgb(255, 255, 0);
+    background-color: #9a2323;
+}

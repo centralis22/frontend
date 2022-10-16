@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
+var tempSession = "";
 
 //Class function starts here
 export default function InstructorSignUp() {
@@ -29,7 +30,7 @@ export default function InstructorSignUp() {
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: create.sessionID }
+        query: { sessionID: tempSession },
       });
 
     } else if (
@@ -74,6 +75,8 @@ export default function InstructorSignUp() {
 
   function handleSignIn(event) {
     event.preventDefault();
+
+    tempSession = create.sessionID;
 
     var sendobj = {
       request_id: 4870,

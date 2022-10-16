@@ -1,8 +1,21 @@
 import React from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 function Banner(props) {
   var isSession = props.Session;
+  const router = useRouter();
+
+  function handleLogout() {
+    
+    if (props.UserType === "Student") {
+      
+      router.push("/studentSignIn");
+    } else {
+      
+      router.push("/instructorSignUp");
+    }
+  }
 
   return (
     <nav className="NavBar">
@@ -14,6 +27,9 @@ function Banner(props) {
         {isSession ? (
           <p className="SessionNumber">Session #: {props.sessionID}</p>
         ) : null}
+      </div>
+      <div className="LogoutButtonDiv">
+        {isSession ? <button className="LogoutButton" onClick={handleLogout}>Logout</button> : null}
       </div>
     </nav>
   );
