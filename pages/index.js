@@ -1,5 +1,5 @@
 import React from 'react';
-import StudentSignIn from './StudentSignIn';
+import StudentSignIn from './studentSignIn';
 
 function LoginPage() {
   return (

@@ -29,6 +29,36 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/instructorIntroduction.js"
+    ],
+    "/instructorResults": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/instructorResults.js"
+    ],
+    "/instructorSignUp": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/instructorSignUp.js"
+    ],
+    "/instructorSurvey1": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/instructorSurvey1.js"
+    ],
+    "/instructorSurvey2": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/instructorSurvey2.js"
+    ],
+    "/studentIntroduction": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/studentIntroduction.js"
+    ],
+    "/studentSignIn": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/studentSignIn.js"
     ]
   },
   "ampFirstPages": []

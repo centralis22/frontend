@@ -11,7 +11,7 @@ function GameNextStepButton(props) {
   }
 
   return (
-    <button className="IntroductionNextButton" onClick={handleNextPage}>
+    <button className="GameNextButton" onClick={handleNextPage}>
       Next step
     </button>
   );

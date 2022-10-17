@@ -67,7 +67,7 @@ body {
   text-decoration: none;
 }
 
-.IntroductionNextButton {
+.GameNextButton {
   position: fixed;
   bottom: 50px;
   right: 50px;
@@ -80,9 +80,10 @@ body {
   border-radius: 5px;
 }
 
-.IntroductionNextButton:hover {
+.GameNextButton:hover {
     color: rgb(255, 255, 0);
     background-color: #9a2323;
+    cursor: pointer;
 }
 
 .LogoutButtonDiv {
@@ -104,4 +105,5 @@ body {
 .LogoutButton:hover {
     color: rgb(255, 255, 0);
     background-color: #9a2323;
+    cursor: pointer;
 }
