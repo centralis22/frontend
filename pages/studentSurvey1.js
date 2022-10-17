@@ -20,7 +20,7 @@ export default function StudentSurvey1() {
   }
 
   return (
-    <StudentLayout CurrentPage="Survey 1">
+    <StudentLayout sessionID={router.query.sessionID} CurrentPage="Survey 1">
       <Head>
         <title>Survey 1</title>
       </Head>

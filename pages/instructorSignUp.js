@@ -30,7 +30,7 @@ export default function InstructorSignUp() {
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: tempSession, currentPage: 0 },
+        query: { sessionID: tempSession, currentIndex: 0 },
       });
     } else if (
       parsedData.respond_id === 4871 &&
@@ -41,7 +41,7 @@ export default function InstructorSignUp() {
 
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: parsedData.content, currentPage: 0 },
+        query: { sessionID: parsedData.content, currentIndex: 0 },
       });
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&

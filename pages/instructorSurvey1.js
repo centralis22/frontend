@@ -8,7 +8,7 @@ import instructorPage from "../components/instructorPage";
 
 export default function InstructorSurvey1() {
   const router = useRouter();
-  var isCurrentPage = router.query.currentPage === 1;
+  var isCurrentPage = router.query.currentIndex === 1;
 
   return (
     <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Survey 1">
@@ -20,8 +20,8 @@ export default function InstructorSurvey1() {
         {isCurrentPage ? (
           <GameNextStepButton
             sessionID={router.query.sessionID}
-            PageLink={instructorPage[router.query.currentPage]}
-            currentPage={2}
+            PageLink={instructorPage[router.query.currentIndex+1]}
+            currentIndex={2}
           />
         ) : null}
       </div>

@@ -18,9 +18,9 @@ export default function StudentSurvey2() {
       });
     }
   }
-  
+
   return (
-    <StudentLayout CurrentPage="Survey 2">
+    <StudentLayout sessionID={router.query.sessionID} CurrentPage="Survey 2">
       <Head>
         <title>Survey 2</title>
       </Head>
