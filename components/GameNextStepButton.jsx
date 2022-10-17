@@ -6,6 +6,7 @@ function GameNextStepButton(props) {
 
   function handleNextPage() {
     var sendobj = {
+      request_id: 4872,
       request: "advance_stage",
       content: -1,
     };
