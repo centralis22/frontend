@@ -14,7 +14,12 @@ function DashLink(props) {
   }
 
   return (
-    <Link href={props.hyperLink}>
+    <Link
+      href={{
+        pathname: props.hyperLink,
+        query: { sessionID: props.sessionID },
+      }}
+    >
       <a
         href="/#"
         style={

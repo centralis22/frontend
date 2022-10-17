@@ -5,7 +5,7 @@ function InstructorLayout({ children, sessionID, CurrentPage }) {
   return (
     <div>
       <Banner UserType="Instructor" sessionID={sessionID} Session={true}/>
-      <InstructorDashboard CurrentPage={CurrentPage}/>
+      <InstructorDashboard sessionID={sessionID} CurrentPage={CurrentPage}/>
       <div className="main">{children}</div>
     </div>
   );

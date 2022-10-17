@@ -4,7 +4,10 @@ function GameNextStepButton(props) {
   const router = useRouter();
 
   function handleNextPage() {
-    router.push(props.PageLink);
+    router.push({
+      pathname: props.PageLink,
+      query: { sessionID: props.sessionID },
+    });
   }
 
   return (

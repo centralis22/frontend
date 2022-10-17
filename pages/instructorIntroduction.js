@@ -14,7 +14,7 @@ export default function InstructorIntroduction() {
         <title>Welcome</title>
       </Head>
       <div>Welcome to the welcome page!</div>
-      <GameNextStepButton PageLink="/instructorSurvey1"/>
+      <GameNextStepButton sessionID={router.query.sessionID} PageLink="/instructorSurvey1"/>
     </InstructorLayout>
   );
 }
