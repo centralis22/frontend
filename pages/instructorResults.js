@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 import InstructorLayout from "../components/InstructorLayout";
-import GameNextStepButton from "../components/GameNextStepButton";
 
 export default function InstructorResults() {
   const router = useRouter();
