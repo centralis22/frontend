@@ -8,7 +8,7 @@ export default function InstructorResults() {
   const router = useRouter();
 
   return (
-    <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Results">
+    <InstructorLayout sessionID={router.query.sessionID} currentIndex={router.query.currentIndex} CurrentPage="Results">
       <Head>
         <title>Results</title>
       </Head>

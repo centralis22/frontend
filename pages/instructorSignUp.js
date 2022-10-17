@@ -53,7 +53,7 @@ export default function InstructorSignUp() {
       parsedData.status_code === 400
     ) {
       alert("Joined a session that does not exist.");
-    } else {
+    } else if (parsedData.status_code === 500) {
       alert("Login failed");
     }
   };

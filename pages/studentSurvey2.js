@@ -15,6 +15,7 @@ export default function StudentSurvey2() {
     if (parsedData.broadcast === "advance_stage") {
       router.push({
         pathname: studentPage[parsedData.content],
+        query: { sessionID: router.query.sessionID },
       });
     }
   }

@@ -10,7 +10,7 @@ export default function InstructorSurvey1() {
   var isCurrentPage = router.query.currentIndex === "1";
 
   return (
-    <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Survey 1">
+    <InstructorLayout sessionID={router.query.sessionID} currentIndex={router.query.currentIndex} CurrentPage="Survey 1">
       <Head>
         <title>Survey 1</title>
       </Head>

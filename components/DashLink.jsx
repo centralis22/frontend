@@ -17,7 +17,7 @@ function DashLink(props) {
     <Link
       href={{
         pathname: props.hyperLink,
-        query: { sessionID: props.sessionID, currentPage: props.CurrentPage },
+        query: { sessionID: props.sessionID, currentPage: props.CurrentPage, currentIndex: props.currentIndex },
       }}
     >
       <a

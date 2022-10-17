@@ -10,7 +10,7 @@ export default function InstructorIntroduction() {
   var isCurrentPage = router.query.currentIndex === "0";
 
   return (
-    <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Welcome">
+    <InstructorLayout sessionID={router.query.sessionID} currentIndex={router.query.currentIndex} CurrentPage="Welcome">
       <Head>
         <title>Welcome</title>
       </Head>

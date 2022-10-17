@@ -1,5 +1,13 @@
 {
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js"
+  "/_document": "pages/_document.js",
+  "/studentIntroduction": "pages/studentIntroduction.js",
+  "/": "pages/index.js",
+  "/instructorIntroduction": "pages/instructorIntroduction.js",
+  "/instructorSurvey1": "pages/instructorSurvey1.js",
+  "/studentSurvey1": "pages/studentSurvey1.js",
+  "/instructorResults": "pages/instructorResults.js",
+  "/instructorSurvey2": "pages/instructorSurvey2.js",
+  "/studentSurvey2": "pages/studentSurvey2.js"
 }
