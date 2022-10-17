@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 import { useRouter } from "next/router";
-import Head from 'next/head';
+import Head from "next/head";
 
-import InstructorLayout from '../components/InstructorLayout';
+import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
+import instructorPage from "../components/instructorPage";
 
 export default function InstructorSurvey2() {
   const router = useRouter();
+  var isCurrentPage = router.query.currentPage === 2;
 
   return (
     <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Survey 2">
@@ -14,7 +16,15 @@ export default function InstructorSurvey2() {
         <title>Survey 2</title>
       </Head>
       <div>Welcome to the survey 2 page!</div>
-      <GameNextStepButton sessionID={router.query.sessionID} PageLink="/instructorResults"/>
+      <div>
+        {isCurrentPage ? (
+          <GameNextStepButton
+            sessionID={router.query.sessionID}
+            PageLink={instructorPage[router.query.currentPage]}
+            currentPage={2}
+          />
+        ) : null}
+      </div>
     </InstructorLayout>
   );
 }

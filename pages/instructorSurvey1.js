@@ -4,9 +4,11 @@ import Head from "next/head";
 
 import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
+import instructorPage from "../components/instructorPage";
 
 export default function InstructorSurvey1() {
   const router = useRouter();
+  var isCurrentPage = router.query.currentPage === 1;
 
   return (
     <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Survey 1">
@@ -14,7 +16,15 @@ export default function InstructorSurvey1() {
         <title>Survey 1</title>
       </Head>
       <div>Welcome to the survey 1 page!</div>
-      <GameNextStepButton sessionID={router.query.sessionID} PageLink="/instructorSurvey2"/>
+      <div>
+        {isCurrentPage ? (
+          <GameNextStepButton
+            sessionID={router.query.sessionID}
+            PageLink={instructorPage[router.query.currentPage]}
+            currentPage={2}
+          />
+        ) : null}
+      </div>
     </InstructorLayout>
   );
 }

@@ -30,9 +30,8 @@ export default function InstructorSignUp() {
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: tempSession },
+        query: { sessionID: tempSession, currentPage: 0 },
       });
-
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200
@@ -42,7 +41,7 @@ export default function InstructorSignUp() {
 
       router.push({
         pathname: "/instructorIntroduction",
-        query: { sessionID: parsedData.content },
+        query: { sessionID: parsedData.content, currentPage: 0 },
       });
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
@@ -126,7 +125,7 @@ export default function InstructorSignUp() {
       <Head>
         <title>Centralis Instructor SignIn</title>
       </Head>
-      <Banner UserType="Instructor" SessionID="" Session={false}/>
+      <Banner UserType="Instructor" SessionID="" Session={false} />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
