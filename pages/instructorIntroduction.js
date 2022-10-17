@@ -4,7 +4,6 @@ import Head from "next/head";
 
 import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
-import instructorPage from "../components/instructorPage";
 
 export default function InstructorIntroduction() {
   const router = useRouter();
@@ -20,8 +19,8 @@ export default function InstructorIntroduction() {
         {isCurrentPage ? (
           <GameNextStepButton
             sessionID={router.query.sessionID}
-            PageLink={instructorPage[router.query.currentIndex + 1]}
-            currentIndex={1}
+            PageLink="/instructorSurvey1"
+            currentIndex="1"
           />
         ) : null}
       </div>

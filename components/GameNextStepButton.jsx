@@ -15,7 +15,7 @@ function GameNextStepButton(props) {
 
     router.push({
       pathname: props.PageLink,
-      query: { sessionID: props.sessionID, currentPage: props.currentPage },
+      query: { sessionID: props.sessionID, currentIndex: props.currentIndex },
     });
   }
 
