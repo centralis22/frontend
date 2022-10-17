@@ -10,8 +10,6 @@ export default function InstructorIntroduction() {
   const router = useRouter();
   var isCurrentPage = router.query.currentIndex === "0";
 
-  console.log(isCurrentPage);
-
   return (
     <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Welcome">
       <Head>
