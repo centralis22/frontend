@@ -2,11 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/studentIntroduction": "pages/studentIntroduction.js",
-  "/studentSignIn": "pages/studentSignIn.js",
-  "/instructorSignUp": "pages/instructorSignUp.js",
-  "/instructorIntroduction": "pages/instructorIntroduction.js",
-  "/instructorSurvey1": "pages/instructorSurvey1.js",
   "/instructorSurvey2": "pages/instructorSurvey2.js",
-  "/instructorResults": "pages/instructorResults.js"
+  "/instructorResults": "pages/instructorResults.js",
+  "/instructorIntroduction": "pages/instructorIntroduction.js"
 }

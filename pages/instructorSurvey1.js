@@ -8,7 +8,7 @@ import instructorPage from "../components/instructorPage";
 
 export default function InstructorSurvey1() {
   const router = useRouter();
-  var isCurrentPage = router.query.currentIndex === 1;
+  var isCurrentPage = router.query.currentIndex === "1";
 
   return (
     <InstructorLayout sessionID={router.query.sessionID} CurrentPage="Survey 1">
