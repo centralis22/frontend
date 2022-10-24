@@ -30,40 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/instructorIntroduction": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/instructorIntroduction.js"
-    ],
-    "/instructorResults": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/instructorResults.js"
-    ],
-    "/instructorSurvey1": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/instructorSurvey1.js"
-    ],
-    "/instructorSurvey2": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/instructorSurvey2.js"
-    ],
     "/studentIntroduction": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/studentIntroduction.js"
-    ],
-    "/studentSurvey1": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/studentSurvey1.js"
-    ],
-    "/studentSurvey2": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/studentSurvey2.js"
     ]
   },
   "ampFirstPages": []
