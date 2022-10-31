@@ -39,6 +39,17 @@ body {
   overflow: hidden;
   position: fixed;
   display: flex;
+  left: 306px;
+  width: calc(100% - 306px);
+  height: 100%;
+  padding: 20px;
+  flex-direction: column;
+}
+
+.studentMain {
+  overflow: hidden;
+  display: flex;
+  width: auto;
   padding: 20px;
   flex-direction: column;
 }
@@ -53,7 +64,8 @@ body {
   padding-top: 20px;
 }
 
-.dashboard .button, .ProgressLink {
+.dashboard .button,
+.ProgressLink {
   display: block;
   outline: 0;
   margin-bottom: 8px;
@@ -77,9 +89,9 @@ body {
 }
 
 .GameNextButton:hover {
-    color: rgb(255, 255, 0);
-    background-color: #9a2323;
-    cursor: pointer;
+  color: rgb(255, 255, 0);
+  background-color: #9a2323;
+  cursor: pointer;
 }
 
 .LogoutButtonDiv {
@@ -99,7 +111,59 @@ body {
 }
 
 .LogoutButton:hover {
-    color: rgb(255, 255, 0);
-    background-color: #9a2323;
-    cursor: pointer;
+  color: rgb(255, 255, 0);
+  background-color: #9a2323;
+  cursor: pointer;
+}
+
+.pageImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.surveyTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.surveyQuestion{
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #850000;
+}
+
+.surveyChoices {
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.questionTextField {
+  height: 40px;
+  width: 400px;
+}
+
+.surveySubmitWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 40px;
+  margin-top: 20px;
+}
+
+.surveySubmitButton {
+  height: 40px;
+  background-color: #850000;
+  color: white;
+  font-size: 18px;
+  border-color: black;
+  border-radius: 5px;
+}
+
+.surveySubmitButton:hover{
+  cursor: pointer;
 }

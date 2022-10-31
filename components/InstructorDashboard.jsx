@@ -21,6 +21,13 @@ function InstructorDashboard(props) {
       />
       <DashLink
         currentIndex={props.currentIndex}
+        hyperLink="/instructorBreakingNews"
+        sessionID={props.sessionID}
+        LinkName="Breaking News"
+        CurrentPage={props.CurrentPage}
+      />
+      <DashLink
+        currentIndex={props.currentIndex}
         hyperLink="/instructorSurvey2"
         sessionID={props.sessionID}
         LinkName="Survey 2"

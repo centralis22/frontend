@@ -7,7 +7,7 @@ import Image from "next/image";
 import StudentLayout from "../components/StudentLayout";
 import studentPage from "../components/studentPage";
 
-export default function StudentIntroduction() {
+export default function StudentBreakingNews() {
   const router = useRouter();
 
   sock.onmessage = function (e) {
@@ -22,16 +22,19 @@ export default function StudentIntroduction() {
   };
 
   return (
-    <StudentLayout sessionID={router.query.sessionID} CurrentPage="Welcome">
+    <StudentLayout
+      sessionID={router.query.sessionID}
+      CurrentPage="Breaking News"
+    >
       <Head>
-        <title>Welcome</title>
+        <title>Breaking News</title>
       </Head>
       <div className="pageImage">
         <Image
-          src="/welcome_page.jpg"
+          src="/breaking_news.jpg"
           alt="logo"
-          height="300px"
-          width="1000px"
+          height="600px"
+          width="550px"
         />
       </div>
     </StudentLayout>

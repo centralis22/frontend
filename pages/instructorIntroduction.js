@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 
 import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
@@ -10,11 +11,22 @@ export default function InstructorIntroduction() {
   var isCurrentPage = router.query.currentIndex === "0";
 
   return (
-    <InstructorLayout sessionID={router.query.sessionID} currentIndex={router.query.currentIndex} CurrentPage="Welcome">
+    <InstructorLayout
+      sessionID={router.query.sessionID}
+      currentIndex={router.query.currentIndex}
+      CurrentPage="Welcome"
+    >
       <Head>
         <title>Welcome</title>
       </Head>
-      <div>Welcome to the welcome page!</div>
+      <div className="pageImage">
+        <Image
+          src="/welcome_page.jpg"
+          alt="logo"
+          height="300px"
+          width="1000px"
+        />
+      </div>
       <div>
         {isCurrentPage ? (
           <GameNextStepButton

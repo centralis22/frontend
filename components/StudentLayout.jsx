@@ -4,7 +4,7 @@ function StudentLayout({ children, sessionID, CurrentPage}) {
   return (
     <div>
       <Banner UserType="Student" sessionID={sessionID} Session={true}/>
-      <div className="main">{children}</div>
+      <div className="studentMain">{children}</div>
     </div>
   );
 }

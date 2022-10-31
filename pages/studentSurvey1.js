@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from "next/router";
 import Head from 'next/head';
 import sock from "../config/socket";
+import Survey1 from "../components/Survey1";
 
 import StudentLayout from '../components/StudentLayout';
 import studentPage from "../components/studentPage";
@@ -25,7 +26,7 @@ export default function StudentSurvey1() {
       <Head>
         <title>Survey 1</title>
       </Head>
-      <div>Welcome to the survey 1 page!</div>
+      < Survey1 user="Student"/>
     </StudentLayout>
   );
 }

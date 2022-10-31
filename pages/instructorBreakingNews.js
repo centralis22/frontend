@@ -1,31 +1,38 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Survey1 from "../components/Survey1";
+import Image from "next/image";
 
 import InstructorLayout from "../components/InstructorLayout";
 import GameNextStepButton from "../components/GameNextStepButton";
 
-export default function InstructorSurvey1() {
+export default function InstructorBreakingNews() {
   const router = useRouter();
-  var isCurrentPage = router.query.currentIndex === "1";
+  var isCurrentPage = router.query.currentIndex === "2";
 
   return (
     <InstructorLayout
       sessionID={router.query.sessionID}
       currentIndex={router.query.currentIndex}
-      CurrentPage="Survey 1"
+      CurrentPage="Breaking News"
     >
       <Head>
-        <title>Survey 1</title>
+        <title>Breaking News</title>
       </Head>
-      <Survey1 user="Instructor"/>
+      <div className="pageImage">
+        <Image
+          src="/breaking_news.jpg"
+          alt="breakingNews"
+          height="600px"
+          width="550px"
+        />
+      </div>
       <div>
         {isCurrentPage ? (
           <GameNextStepButton
             sessionID={router.query.sessionID}
             PageLink="/instructorSurvey2"
-            currentIndex="2"
+            currentIndex="3"
           />
         ) : null}
       </div>
