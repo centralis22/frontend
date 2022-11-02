@@ -10,10 +10,10 @@ function Banner(props) {
     
     if (props.UserType === "Student") {
       
-      router.push("/studentSignIn");
+      router.push("/studentLogin");
     } else {
       
-      router.push("/instructorSignUp");
+      router.push("/instructor-login");
     }
   }
 

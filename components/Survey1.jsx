@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import sock from "../config/socket";
 
 function Survey1(props) {
-  var router = useRouter();
   var isStudent = props.user === "Student";
 
   sock.onmessage = function (e) {

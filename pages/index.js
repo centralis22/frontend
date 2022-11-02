@@ -1,9 +1,9 @@
 import React from 'react';
-import StudentSignIn from './studentSignIn';
+import StudentLogin from './studentLogin';
 
 function LoginPage() {
   return (
-      <StudentSignIn />
+      <StudentLogin />
   );
 }
 
