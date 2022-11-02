@@ -8,8 +8,6 @@ import StudentLayout from "../components/StudentLayout";
 import studentPage from "../components/studentPage";
 
 export default function StudentIntroduction() {
-
-  // Used to push query information
   const router = useRouter();
 
   sock.onmessage = function (e) {
