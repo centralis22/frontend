@@ -1,4 +1,8 @@
-const studentPage = ["/studentIntroduction", "/studentSurvey1", "/BreakingNews", "/studentSurvey2"];
+const studentPage = [
+    "/studentIntroduction",
+  "/studentSurvey1",
+  "/studentBreakingNews",
+  "/studentSurvey2"
+];
   
-  export default studentPage;
-  
+export default studentPage;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import sock from "../config/socket";
@@ -14,70 +14,84 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import {createTheme, ThemeProvider} from "@mui/material/styles";
 
 const theme = createTheme();
-var isCorrect = true;
-var tempSession = "";
 
-//Class function starts here
 export default function StudentSignIn() {
   var router = useRouter();
 
+  /**
+   * Student's login status. Displays an error message on false.
+   */
+  const [isLoginSuccess, setLoginSuccess] = React.useState(true);
+  /**
+   * Student's credentials. Contains session ID and room name.
+   */
+  const [studentCredentials, setStudentCredentials] = React.useState({
+    sessionID: "",
+    roomName: "",
+  });
+
+  /**
+   * SockJS communication.
+   */
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
       router.push({
         pathname: "/studentIntroduction",
-        query: { sessionID: tempSession },
+        query: { sessionID: studentCredentials.sessionID },
       });
-
-      setState(true);
+      setLoginSuccess(true);
     } else {
-      
-      alert("Login failed");
-      setState(false);
+      setStudentCredentials({
+        sessionID: "",
+        roomName: "",
+      });
+      setLoginSuccess(false);
     }
-  };
+  }
 
-  const [isState, setState] = React.useState(isCorrect);
-  const [create, setCreate] = React.useState({
-    sessionID: "",
-    roomName: "",
-  });
 
+  /**
+   * MUI TextField save content.
+   */
   function saveText(event) {
     const { value, name } = event.target;
 
-    setCreate((prevValue) => {
+    console.log(studentCredentials.roomName + " " + studentCredentials.sessionID);
+
+    setStudentCredentials((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   }
 
-  //When Join Button clicked
+  /**
+   * Student on click join room.
+   */
   function handleJoinRoom(event) {
     event.preventDefault();
-
-    tempSession = create.sessionID;
 
     var sendobj = {
       request_id: 4869,
       request: "login",
       content: {
         user_type: "student",
-        user_name: create.roomName,
+        user_name: studentCredentials.roomName,
         user_pswd: "",
-        session_id: create.sessionID,
+        session_id: studentCredentials.sessionID,
       },
     };
 
     sock.send(JSON.stringify(sendobj));
 
-    setCreate({
+    // TODO: Why on earth would you want to clear this value here???
+/*    setStudentCredentials({
       sessionID: "",
       roomName: "",
-    });
+    });*/
   }
 
   return (
@@ -85,7 +99,9 @@ export default function StudentSignIn() {
       <Head>
         <title>Centralis Student SignIn</title>
       </Head>
+
       <Banner UserType="Student" SessionID="" Session={false}/>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -96,7 +112,7 @@ export default function StudentSignIn() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h1" fontWeight={"bold"}>
+          <Typography variant="h1" fontWeight="bold">
             Centralis
           </Typography>
           <Typography component="h1" variant="h4" color="#850000">
@@ -116,7 +132,7 @@ export default function StudentSignIn() {
               id="sessionID"
               label="Session ID"
               name="sessionID"
-              value={create.sessionID}
+              value={studentCredentials.sessionID}
               onChange={saveText}
               autoFocus
             />
@@ -128,11 +144,11 @@ export default function StudentSignIn() {
               name="roomName"
               label="Room Name"
               type="roomName"
-              value={create.roomName}
+              value={studentCredentials.roomName}
               onChange={saveText}
             />
             <div>
-              {isState ? null : 
+              {isLoginSuccess ? null :
                 <span className="loginError">
                   Please enter a valid session ID and room name
                 </span>

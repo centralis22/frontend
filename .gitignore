@@ -33,3 +33,5 @@ yarn-error.log*
 .next/cache/webpack/*
 .next/trace
 .next/cache
+
+/.idea/

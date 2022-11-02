@@ -1,3 +1,7 @@
+/**
+ * Deprecated.
+ */
+
 const instructorPage = [
   "/instructorIntroduction",
   "/instructorSurvey1",

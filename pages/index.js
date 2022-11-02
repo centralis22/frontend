@@ -3,9 +3,7 @@ import StudentSignIn from './studentSignIn';
 
 function LoginPage() {
   return (
-    <div>
       <StudentSignIn />
-    </div>
   );
 }
 
