@@ -33,6 +33,7 @@ export default function InstructorLogin() {
         pathname: "/instructorIntroduction",
         query: { sessionID: tempSession, currentIndex: 0 },
       });
+      setInstructor(true);
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200

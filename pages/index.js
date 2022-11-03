@@ -1,10 +1,14 @@
 import React from 'react';
-import StudentLogin from './studentLogin';
+import StudentLogin from "./student-login";
 
-function LoginPage() {
+/**
+ * Application entry point.
+ */
+function EntryPoint() {
+
   return (
-      <StudentLogin />
+    <StudentLogin />
   );
 }
 
-export default LoginPage;
+export default EntryPoint;

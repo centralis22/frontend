@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import StudentLayout from "../components/StudentLayout";
 import studentPage from "../components/studentPage";
+import {useUserContext} from "../context/user";
+import SessionLayout from "../components/SessionLayout";
 
 export default function StudentIntroduction() {
   const router = useRouter();
@@ -23,7 +25,7 @@ export default function StudentIntroduction() {
   };
 
   return (
-    <StudentLayout sessionID={router.query.sessionID} CurrentPage="Welcome">
+    <SessionLayout>
       <Head>
         <title>Welcome</title>
       </Head>
@@ -35,6 +37,6 @@ export default function StudentIntroduction() {
           width="1000px"
         />
       </div>
-    </StudentLayout>
+    </SessionLayout>
   );
 }

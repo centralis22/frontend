@@ -1,19 +1,19 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import {useUserContext} from "../context/user";
 
-function Banner(props) {
-  var isSession = props.Session;
+function Banner() {
   const router = useRouter();
 
+  const { isInstructor, sessionID } = useUserContext();
+  var userTypeString = isInstructor ? "Instructor" : "Student";
+
   function handleLogout() {
-    
-    if (props.UserType === "Student") {
-      
-      router.push("/studentLogin");
-    } else {
-      
+    if (isInstructor) {
       router.push("/instructor-login");
+    } else {
+      router.push("/student-login");
     }
   }
 
@@ -22,14 +22,12 @@ function Banner(props) {
       <div className="USCLogo">
         <Image src="/usc-logo.png" alt="logo" height="55px" width="55px" />
       </div>
-      <span className="BannerTitle">Centralis {props.UserType}</span>
+      <span className="BannerTitle">Centralis {userTypeString}</span>
       <div>
-        {isSession ? (
-          <p className="SessionNumber">Session #: {props.sessionID}</p>
-        ) : null}
+        <p className="SessionNumber">Session #: {sessionID}</p>
       </div>
       <div className="LogoutButtonDiv">
-        {isSession ? <button className="LogoutButton" onClick={handleLogout}>Logout</button> : null}
+        <button className="LogoutButton" onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   );
