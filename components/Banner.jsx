@@ -1,13 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import {useUserContext} from "../context/user";
+import { useUserContext } from "../context/user";
 
 function Banner() {
   const router = useRouter();
 
   const { isInstructor, sessionID } = useUserContext();
-  var userTypeString = isInstructor ? "Instructor" : "Student";
+  const userTypeString = isInstructor ? "Instructor" : "Student";
 
   function handleLogout() {
     if (isInstructor) {

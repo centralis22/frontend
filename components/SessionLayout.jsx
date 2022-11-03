@@ -1,7 +1,6 @@
-import {useUserContext} from "../context/user";
+import { useUserContext } from "../context/user";
 import InstructorDashboard from "./session-displays/InstructorDashboard";
 import Banner from "./Banner";
-import GameNextStepButton from "./GameNextStepButton";
 import React from "react";
 
 function SStudentLayout({ children, sessionID, CurrentPage}) {
@@ -16,7 +15,7 @@ function SStudentLayout({ children, sessionID, CurrentPage}) {
 function SInstructorLayout({ children, sessionID, CurrentPage, currentIndex }) {
   return (
     <div>
-      <Banner UserType="Instructor" sessionID={sessionID} />
+      <Banner />
       <InstructorDashboard sessionID={sessionID} CurrentPage={CurrentPage} currentIndex={currentIndex}/>
       <div className="main">{children}</div>
     </div>

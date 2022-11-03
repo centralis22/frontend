@@ -15,6 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useUserContext } from "../context/user";
 
 const theme = createTheme();
 
@@ -24,13 +25,31 @@ var tempSession = "";
 export default function InstructorLogin() {
   var router = useRouter();
 
+  /**
+   * User's global credentials. For use in multiple sections across app.
+   */
+  const { setSessionID, setInstructor } = useUserContext();
+
+  // TODO: Add similar error message display for instructor.
+
+  // TODO: Modify instructor login to useState() instead of global variables.
+  /**
+   * Student's credentials. Contains session ID and room name.
+   */
+  const [instructorCredentials, setInstructorCredentials] = React.useState({
+    username: "",
+    password: "",
+    sessionID: "",
+  });
+
+  // TODO: Format this.
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     //Push user to the existed session
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
-        pathname: "/instructorIntroduction",
+        pathname: "/instructor-introduction",
         query: { sessionID: tempSession, currentIndex: 0 },
       });
       setInstructor(true);
@@ -42,34 +61,44 @@ export default function InstructorLogin() {
       alert("Your new session ID is: " + parsedData.content);
 
       router.push({
-        pathname: "/instructorIntroduction",
+        pathname: "/instructor-introduction",
         query: { sessionID: parsedData.content, currentIndex: 0 },
       });
+
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
       parsedData.status_code === 403
     ) {
       alert("Wrong login credentials given, please try again.");
+      setInstructorCredentials({
+        username: "",
+        password: "",
+        sessionID: "",
+      });
     } else if (
       parsedData.respond_id === 4870 &&
       parsedData.status_code === 400
     ) {
       alert("Joined a session that does not exist.");
+      setInstructorCredentials({
+        username: "",
+        password: "",
+        sessionID: "",
+      });
     } else if (parsedData.status_code === 500) {
       alert("Login failed");
+      setInstructorCredentials({
+        username: "",
+        password: "",
+        sessionID: "",
+      });
     }
   };
-
-  const [create, setCreate] = React.useState({
-    username: "",
-    password: "",
-    sessionID: "",
-  });
 
   function saveText(event) {
     const { value, name } = event.target;
 
-    setCreate((prevValue) => {
+    setInstructorCredentials((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   }
@@ -77,28 +106,33 @@ export default function InstructorLogin() {
   function handleSignIn(event) {
     event.preventDefault();
 
-    tempSession = create.sessionID;
+    // TODO: Remove.
+    tempSession = instructorCredentials.sessionID;
 
     var sendobj = {
       request_id: 4870,
       request: "login",
       content: {
         user_type: "admin",
-        user_name: create.username,
-        user_pswd: create.password,
-        session_id: create.sessionID,
+        user_name: instructorCredentials.username,
+        user_pswd: instructorCredentials.password,
+        session_id: instructorCredentials.sessionID,
       },
     };
 
     sock.send(JSON.stringify(sendobj));
 
-    setCreate({
+    // TODO: DO NOT CLEAR CREDENTIALS HERE! CLEAR ONLY AFTER FAILED LOGIN.
+    setInstructorCredentials({
       username: "",
       password: "",
       sessionID: "",
     });
   }
 
+  /**
+   * Instructor onClick create_session.
+   */
   function handleCreateSession(event) {
     event.preventDefault();
 
@@ -107,19 +141,13 @@ export default function InstructorLogin() {
       request: "create_session",
       content: {
         user_type: "admin",
-        user_name: create.username,
-        user_pswd: create.password,
-        session_id: create.sessionID,
+        user_name: instructorCredentials.username,
+        user_pswd: instructorCredentials.password,
+        session_id: instructorCredentials.sessionID,
       },
     };
 
     sock.send(JSON.stringify(sendobj));
-
-    setCreate({
-      username: "",
-      password: "",
-      sessionID: "",
-    });
   }
 
   return (
@@ -158,7 +186,7 @@ export default function InstructorLogin() {
               id="uusername"
               label="Username"
               name="username"
-              value={create.username}
+              value={instructorCredentials.username}
               onChange={saveText}
               autoFocus
             />
@@ -170,7 +198,7 @@ export default function InstructorLogin() {
               name="password"
               label="Password"
               type="password"
-              value={create.password}
+              value={instructorCredentials.password}
               onChange={saveText}
             />
             <TextField
@@ -181,7 +209,7 @@ export default function InstructorLogin() {
               name="sessionID"
               label="Session ID"
               type="sessionID"
-              value={create.sessionID}
+              value={instructorCredentials.sessionID}
               onChange={saveText}
             />
             <Button

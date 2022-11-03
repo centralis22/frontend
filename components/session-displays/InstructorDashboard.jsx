@@ -1,45 +1,28 @@
 import React from "react";
 import DashLink from "./DashLink";
+import { SESSION_ORDER_URL, SESSION_ORDER_NAMES } from "../PageDirectory";
 
 function InstructorDashboard(props) {
+
+  /**
+   * Individual links in Dashboard, dynamically generated.
+   */
+  const dashboardLinks = [];
+  for (let i = 0; i < SESSION_ORDER_URL.length; i++) {
+    dashboardLinks.push(
+      <DashLink
+        currentIndex={props.currentIndex}
+        hyperLink={SESSION_ORDER_URL.at(i)}
+        sessionID={props.sessionID}
+        LinkName={SESSION_ORDER_NAMES.at(i)}
+        CurrentPage={props.CurrentPage}
+      />)
+  }
+
   return (
     <div className="dashboard" alt="dashboard">
       <h1 style={{ marginBottom: "20px" }}>Dashboard</h1>
-      <DashLink
-        currentIndex={props.currentIndex}
-        hyperLink="/instructorIntroduction"
-        sessionID={props.sessionID}
-        LinkName="Welcome"
-        CurrentPage={props.CurrentPage}
-      />
-      <DashLink
-        currentIndex={props.currentIndex}
-        hyperLink="/instructorSurvey1"
-        sessionID={props.sessionID}
-        LinkName="Survey 1"
-        CurrentPage={props.CurrentPage}
-      />
-      <DashLink
-        currentIndex={props.currentIndex}
-        hyperLink="/instructorBreakingNews"
-        sessionID={props.sessionID}
-        LinkName="Breaking News"
-        CurrentPage={props.CurrentPage}
-      />
-      <DashLink
-        currentIndex={props.currentIndex}
-        hyperLink="/instructorSurvey2"
-        sessionID={props.sessionID}
-        LinkName="Survey 2"
-        CurrentPage={props.CurrentPage}
-      />
-      <DashLink
-        currentIndex={props.currentIndex}
-        hyperLink="/instructorResults"
-        sessionID={props.sessionID}
-        LinkName="Results"
-        CurrentPage={props.CurrentPage}
-      />
+      {dashboardLinks}
     </div>
   );
 }
