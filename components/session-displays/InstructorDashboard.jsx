@@ -11,10 +11,11 @@ function InstructorDashboard(props) {
   for (let i = 0; i < SESSION_ORDER_URL.length; i++) {
     dashboardLinks.push(
       <DashLink
-        currentIndex={props.currentIndex}
+        key={i}
         hyperLink={SESSION_ORDER_URL.at(i)}
+        pageName={SESSION_ORDER_NAMES.at(i)}
+        currentIndex={props.currentIndex}
         sessionID={props.sessionID}
-        LinkName={SESSION_ORDER_NAMES.at(i)}
         CurrentPage={props.CurrentPage}
       />)
   }

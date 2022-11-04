@@ -2,8 +2,9 @@ import { useUserContext } from "../context/user";
 import InstructorDashboard from "./session-displays/InstructorDashboard";
 import Banner from "./Banner";
 import React from "react";
+import GameNextStepButton from "./GameNextStepButton";
 
-function SStudentLayout({ children, sessionID, CurrentPage}) {
+function SStudentLayout({ children }) {
   return (
     <div>
       <Banner />
@@ -12,12 +13,20 @@ function SStudentLayout({ children, sessionID, CurrentPage}) {
   );
 }
 
-function SInstructorLayout({ children, sessionID, CurrentPage, currentIndex }) {
+function SInstructorLayout({ children, CurrentPage, currentIndex }) {
+
+  const { sessionID } = useUserContext();
+
   return (
     <div>
       <Banner />
       <InstructorDashboard sessionID={sessionID} CurrentPage={CurrentPage} currentIndex={currentIndex}/>
       <div className="main">{children}</div>
+      <GameNextStepButton
+        sessionID={sessionID}
+        PageLink="/instructorSurvey1"
+        currentIndex={currentIndex}
+      />
     </div>
   );
 }
@@ -26,6 +35,7 @@ function SInstructorLayout({ children, sessionID, CurrentPage, currentIndex }) {
  * Generic layout for sessions.
  */
 function SessionLayout({ children }) {
+
   const { isInstructor } = useUserContext();
 
   return (

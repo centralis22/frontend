@@ -27,15 +27,6 @@ export default function InstructorIntroduction() {
           width="1000px"
         />
       </div>
-      <div>
-        {isCurrentPage ? (
-          <GameNextStepButton
-            sessionID={router.query.sessionID}
-            PageLink="/instructorSurvey1"
-            currentIndex="1"
-          />
-        ) : null}
-      </div>
     </InstructorLayout>
   );
 }

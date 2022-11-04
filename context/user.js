@@ -8,7 +8,6 @@ import React, { useState } from "react";
   https://stackoverflow.com/questions/41030361/
   how-to-update-react-context-from-inside-a-child-component
  */
-
 const UserContext = React.createContext({
   sessionID: 0,
   setSessionID: () => 0,
@@ -16,9 +15,6 @@ const UserContext = React.createContext({
   setInstructor: () => {},
 });
 
-/**
- * Application context. Contains user information.
- */
 export function UserContextProvider({children}) {
   const [sessionID, setSessionID] = useState(0);
   const [isInstructor, setInstructor] = useState(false);
@@ -35,6 +31,10 @@ export function UserContextProvider({children}) {
   );
 }
 
+/**
+ * UserContext contains information to identify
+ * user's session and user's privileges.
+ */
 export function useUserContext() {
   return React.useContext(UserContext);
 }

@@ -1,5 +1,7 @@
 import InstructorDashboard from "./session-displays/InstructorDashboard";
 import Banner from "./Banner";
+import GameNextStepButton from "./GameNextStepButton";
+import React from "react";
 
 function InstructorLayout({ children, sessionID, CurrentPage, currentIndex }) {
   return (

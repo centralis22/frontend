@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 function DashLink(props) {
-  var isCurrentPage = props.CurrentPage === props.LinkName;
+  const isCurrentPage = props.CurrentPage === props.pageName;
   const [buttonState, changeButtonState] = React.useState(false);
 
   function mouseOut() {
@@ -38,7 +38,7 @@ function DashLink(props) {
         className="button"
         alt="state button"
       >
-        {props.LinkName}
+        {props.pageName}
       </a>
     </Link>
   );

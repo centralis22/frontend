@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import sock from "../config/socket";
 
+/**
+ * Sends advance_stage signal to the server.
+ * Forwarding to the new page will be done on receiving
+ * a broadcast, to decouple the button with the router.
+ */
 function GameNextStepButton(props) {
   const router = useRouter();
 
@@ -13,10 +18,13 @@ function GameNextStepButton(props) {
 
     sock.send(JSON.stringify(sendobj));
 
+    // Ini
+    /*
     router.push({
       pathname: props.PageLink,
       query: { sessionID: props.sessionID, currentIndex: props.currentIndex },
     });
+     */
   }
 
   return (
