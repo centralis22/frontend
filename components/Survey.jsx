@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import sock from "../config/socket";
 
 function Survey({surveyNumber, user}) {
+  var router = useRouter();
   var isStudent = {user} === "Student";
 
   /**
