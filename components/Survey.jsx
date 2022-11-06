@@ -2,8 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import sock from "../config/socket";
 
-function Survey1(props) {
-  var isStudent = props.user === "Student";
+function Survey({surveyNumber, user}) {
+  var isStudent = {user} === "Student";
 
   /**
    * Survey answers.
@@ -57,7 +57,7 @@ function Survey1(props) {
 
   return (
     <div>
-      <p className="surveyTitle">Survey</p>
+      <p className="surveyTitle">Survey {surveyNumber}</p>
       <div>
         <span className="surveyQuestion">
           This round, did your team decide to change anything regarding its
@@ -197,4 +197,4 @@ function Survey1(props) {
   );
 }
 
-export default Survey1;
+export default Survey;

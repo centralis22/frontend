@@ -9,6 +9,8 @@ function Banner() {
   const { isInstructor, sessionID } = useUserContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
 
+  var isSession = isInstructor;
+
   function handleLogout() {
     if (isInstructor) {
       router.push("/instructor-login");
@@ -27,7 +29,11 @@ function Banner() {
         <p className="SessionNumber">Session #: {sessionID}</p>
       </div>
       <div className="LogoutButtonDiv">
-        <button className="LogoutButton" onClick={handleLogout}>Logout</button>
+        {isSession ? (
+          <button className="LogoutButton" onClick={handleLogout}>
+            Logout
+          </button>
+        ) : null}
       </div>
     </nav>
   );

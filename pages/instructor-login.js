@@ -30,6 +30,8 @@ export default function InstructorLogin() {
    */
   const { setSessionID, setInstructor } = useUserContext();
 
+  setInstructor(true);
+
   // TODO: Add similar error message display for instructor.
 
   // TODO: Modify instructor login to useState() instead of global variables.
@@ -53,7 +55,6 @@ export default function InstructorLogin() {
         query: { sessionID: tempSession, sessionProgress: 0 },
       });
       setSessionID(tempSession);
-      setInstructor(true);
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200
@@ -159,7 +160,7 @@ export default function InstructorLogin() {
       <Head>
         <title>Centralis Instructor SignIn</title>
       </Head>
-      <Banner UserType="Instructor" SessionID="" Session={false} />
+      <Banner />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

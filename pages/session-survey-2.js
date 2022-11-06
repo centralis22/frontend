@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from 'next/head';
+import Head from "next/head";
 import sock from "../config/socket";
-import Survey1 from "../components/Survey1";
+import Survey from "../components/Survey";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
 import SessionLayout from "../components/SessionLayout";
@@ -27,10 +27,9 @@ export default function SessionSurvey2() {
             query: { sessionID: router.query.sessionID },
           });
         }
-      }
+      };
     }
-  }, [])
-
+  }, []);
 
   return (
     <SessionLayout
@@ -40,7 +39,7 @@ export default function SessionSurvey2() {
       <Head>
         <title>Survey 2</title>
       </Head>
-      < Survey1 user={userTypeStr} />
+      <Survey surveyNumber="2" user={userTypeStr} />
     </SessionLayout>
   );
 }

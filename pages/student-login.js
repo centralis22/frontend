@@ -25,7 +25,9 @@ export default function StudentLogin() {
   /**
    * User's global credentials. For use in multiple sections across app.
    */
-  const { setSessionID } = useUserContext();
+  const { setSessionID, setInstructor } = useUserContext();
+
+  setInstructor(false);
 
   /**
    * Student's login status. Displays an error message on false.
@@ -103,7 +105,7 @@ export default function StudentLogin() {
       <Head>
         <title>Centralis Student SignIn</title>
       </Head>
-      <Banner UserType="Student" SessionID="" Session={false}/>
+      <Banner />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

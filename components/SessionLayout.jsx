@@ -25,14 +25,12 @@ function SStudentLayout({ children }) {
  * Generic layout for instructors.
  */
 function SInstructorLayout({ children, pageID, sessionProgress }) {
-
   const { sessionID } = useUserContext();
 
   // Only display <SNextStepButton> for page matching session progress,
   // AND if page is not the last page.
   let hasNextStep = false;
-  if (pageID === sessionProgress
-    && pageID < SESSION_PAGE_URLS.length - 2) {
+  if (pageID === sessionProgress && pageID < SESSION_PAGE_URLS.length - 2) {
     hasNextStep = true;
   }
 
@@ -45,15 +43,13 @@ function SInstructorLayout({ children, pageID, sessionProgress }) {
         sessionProgress={sessionProgress}
       />
       <div className="main">{children}</div>
-      {hasNextStep
-        ?
-          <SNextStepButton
-            sessionID={sessionID}
-            pageLink={SESSION_PAGE_URLS.at(sessionProgress + 1)}
-            sessionProgress={sessionProgress}
-          />
-        :
-          null}
+      {hasNextStep ? (
+        <SNextStepButton
+          sessionID={sessionID}
+          pageLink={SESSION_PAGE_URLS.at(sessionProgress + 1)}
+          sessionProgress={sessionProgress}
+        />
+      ) : null}
     </div>
   );
 }
@@ -72,7 +68,6 @@ function SInstructorLayout({ children, pageID, sessionProgress }) {
  * @returns {JSX.Element}
  */
 function SessionLayout({ children, pageID, sessionProgress }) {
-
   const router = useRouter();
 
   const { isInstructor, setInstructor } = useUserContext();
@@ -80,23 +75,19 @@ function SessionLayout({ children, pageID, sessionProgress }) {
   sessionProgress = Number(sessionProgress);
 
   // For debugging instructor view.
-/*  if (Boolean(router.query.isInstructor) === true) {
+  if (Boolean(router.query.isInstructor) === true) {
     setInstructor(true);
-  }*/
+  }
 
   return (
     <div>
-      {isInstructor
-        ?
-          <SInstructorLayout
-            pageID={pageID}
-            sessionProgress={sessionProgress}>
-              {children}
-          </SInstructorLayout>
-        :
-          <SStudentLayout>
-            {children}
-          </SStudentLayout>}
+      {isInstructor ? (
+        <SInstructorLayout pageID={pageID} sessionProgress={sessionProgress}>
+          {children}
+        </SInstructorLayout>
+      ) : (
+        <SStudentLayout>{children}</SStudentLayout>
+      )}
     </div>
   );
 }
