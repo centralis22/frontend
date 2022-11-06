@@ -32,7 +32,7 @@ function SInstructorLayout({ children, pageID, sessionProgress }) {
   // AND if page is not the last page.
   let hasNextStep = false;
   if (pageID === sessionProgress
-    && pageID !== SESSION_PAGE_URLS.length - 1) {
+    && pageID < SESSION_PAGE_URLS.length - 2) {
     hasNextStep = true;
   }
 
