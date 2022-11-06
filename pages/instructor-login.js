@@ -49,8 +49,8 @@ export default function InstructorLogin() {
     //Push user to the existed session
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
       router.push({
-        pathname: "/instructor-introduction",
-        query: { sessionID: tempSession, currentIndex: 0 },
+        pathname: "/session-introduction",
+        query: { sessionID: tempSession, sessionProgress: 0 },
       });
       setInstructor(true);
     } else if (
@@ -60,9 +60,12 @@ export default function InstructorLogin() {
       //Push user to the newly created random session
       alert("Your new session ID is: " + parsedData.content);
 
+      // FIXME: Critical error, pushed to intro page, without login.
+      // Fix in either front-end or backend.
+
       router.push({
-        pathname: "/instructor-introduction",
-        query: { sessionID: parsedData.content, currentIndex: 0 },
+        pathname: "/session-introduction",
+        query: { sessionID: parsedData.content, sessionProgress: 0 },
       });
 
     } else if (

@@ -25,7 +25,7 @@ export default function StudentLogin() {
   /**
    * User's global credentials. For use in multiple sections across app.
    */
-  const {setSessionID} = useUserContext();
+  const { setSessionID } = useUserContext();
 
   /**
    * Student's login status. Displays an error message on false.
@@ -47,7 +47,7 @@ export default function StudentLogin() {
 
     if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
       router.push({
-        pathname: "/student-introduction",
+        pathname: "/session-introduction",
         query: { sessionID: studentCredentials.sessionID },
       });
       setSessionID(studentCredentials.sessionID);

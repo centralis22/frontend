@@ -6,7 +6,7 @@ import sock from "../config/socket";
  * Forwarding to the new page will be done on receiving
  * a broadcast, to decouple the button with the router.
  */
-function GameNextStepButton(props) {
+function SNextStepButton(props) {
   const router = useRouter();
 
   function handleNextPage() {
@@ -34,4 +34,4 @@ function GameNextStepButton(props) {
   );
 }
 
-export default GameNextStepButton;
+export default SNextStepButton;

@@ -5,11 +5,10 @@ import sock from "../config/socket";
 function Survey1(props) {
   var isStudent = props.user === "Student";
 
-  sock.onmessage = function (e) {
-    var parsedData = JSON.parse(e.data);
-  };
-
-  const [create, setCreate] = React.useState({
+  /**
+   * Survey answers.
+   */
+  const [answer, setAnswer] = React.useState({
     question1: "",
     question2: "",
     question3: "",
@@ -20,7 +19,7 @@ function Survey1(props) {
   function saveText(event) {
     const { value, name } = event.target;
 
-    setCreate((prevValue) => {
+    setAnswer((prevValue) => {
       return { ...prevValue, [name]: value };
     });
   }
@@ -29,11 +28,11 @@ function Survey1(props) {
     event.preventDefault();
 
     const tempArray = [
-      create.question1,
-      create.question2,
-      create.question3,
-      create.question4,
-      create.question5,
+      answer.question1,
+      answer.question2,
+      answer.question3,
+      answer.question4,
+      answer.question5,
     ];
 
     var sendobj = {
@@ -47,7 +46,7 @@ function Survey1(props) {
 
     sock.send(JSON.stringify(sendobj));
 
-    setCreate({
+    setAnswer({
       question1: "",
       question2: "",
       question3: "",
@@ -108,7 +107,7 @@ function Survey1(props) {
             onChange={saveText}
             name="question2"
             width="500px"
-            value={create.question2}
+            value={answer.question2}
             rows="3"
           />
         </div>
@@ -182,7 +181,7 @@ function Survey1(props) {
             onChange={saveText}
             name="question5"
             width="500px"
-            value={create.question5}
+            value={answer.question5}
             rows="3"
           />
         </div>

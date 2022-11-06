@@ -7,7 +7,7 @@ function Banner() {
   const router = useRouter();
 
   const { isInstructor, sessionID } = useUserContext();
-  const userTypeString = isInstructor ? "Instructor" : "Student";
+  const userTypeStr = isInstructor ? "Instructor" : "Student";
 
   function handleLogout() {
     if (isInstructor) {
@@ -22,7 +22,7 @@ function Banner() {
       <div className="USCLogo">
         <Image src="/usc-logo.png" alt="logo" height="55px" width="55px" />
       </div>
-      <span className="BannerTitle">Centralis {userTypeString}</span>
+      <span className="BannerTitle">Centralis {userTypeStr}</span>
       <div>
         <p className="SessionNumber">Session #: {sessionID}</p>
       </div>
