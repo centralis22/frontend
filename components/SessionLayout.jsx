@@ -49,8 +49,8 @@ function SInstructorLayout({ children, pageID, sessionProgress }) {
         ?
           <SNextStepButton
             sessionID={sessionID}
-            PageLink={SESSION_PAGE_URLS.at(sessionProgress + 1)}
-            currentIndex={sessionProgress}
+            pageLink={SESSION_PAGE_URLS.at(sessionProgress + 1)}
+            sessionProgress={sessionProgress}
           />
         :
           null}

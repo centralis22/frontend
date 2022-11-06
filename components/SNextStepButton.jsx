@@ -1,12 +1,7 @@
 import { useRouter } from "next/router";
 import sock from "../config/socket";
 
-/**
- * Sends advance_stage signal to the server.
- * Forwarding to the new page will be done on receiving
- * a broadcast, to decouple the button with the router.
- */
-function SNextStepButton(props) {
+function SNextStepButton({ sessionID, pageLink, sessionProgress }) {
   const router = useRouter();
 
   function handleNextPage() {
@@ -18,13 +13,10 @@ function SNextStepButton(props) {
 
     sock.send(JSON.stringify(sendobj));
 
-    // Ini
-    /*
     router.push({
-      pathname: props.PageLink,
-      query: { sessionID: props.sessionID, currentIndex: props.currentIndex },
+      pathname: pageLink,
+      query: { sessionID: sessionID, sessionProgress: sessionProgress + 1 },
     });
-     */
   }
 
   return (

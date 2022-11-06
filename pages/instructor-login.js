@@ -52,6 +52,7 @@ export default function InstructorLogin() {
         pathname: "/session-introduction",
         query: { sessionID: tempSession, sessionProgress: 0 },
       });
+      setSessionID(tempSession);
       setInstructor(true);
     } else if (
       parsedData.respond_id === 4871 &&
