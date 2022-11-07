@@ -6,7 +6,7 @@ import { useUserContext } from "../context/user";
 function Banner() {
   const router = useRouter();
 
-  const { isInstructor, sessionID, isLoggedIn } = useUserContext();
+  const { isInstructor, sessionID, isLoggedIn, setLoggedIn } = useUserContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
 
   var isSession = isLoggedIn;
@@ -17,6 +17,9 @@ function Banner() {
     } else {
       router.push("/student-login");
     }
+
+    setLoggedIn(false);
+    isSession = isLoggedIn;
   }
 
   return (
