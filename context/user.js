@@ -13,15 +13,19 @@ const UserContext = React.createContext({
   setSessionID: () => 0,
   isInstructor: false,
   setInstructor: () => {},
+  isLoggedIn: false,
+  setLoggedIn: () => {},
 });
 
 export function UserContextProvider({children}) {
   const [sessionID, setSessionID] = useState(0);
   const [isInstructor, setInstructor] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const userValues = {
     sessionID, setSessionID,
     isInstructor, setInstructor,
+    isLoggedIn, setLoggedIn
   };
 
   return (

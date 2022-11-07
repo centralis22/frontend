@@ -28,7 +28,7 @@ export default function InstructorLogin() {
   /**
    * User's global credentials. For use in multiple sections across app.
    */
-  const { setSessionID, setInstructor } = useUserContext();
+  const { setSessionID, setInstructor, setLoggedIn } = useUserContext();
 
   setInstructor(true);
 
@@ -55,6 +55,7 @@ export default function InstructorLogin() {
         query: { sessionID: tempSession, sessionProgress: 0 },
       });
       setSessionID(tempSession);
+      setLoggedIn(true);
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200
@@ -69,7 +70,7 @@ export default function InstructorLogin() {
         pathname: "/session-introduction",
         query: { sessionID: parsedData.content, sessionProgress: 0 },
       });
-
+      setLoggedIn(true);
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
       parsedData.status_code === 403

@@ -1,10 +1,10 @@
 import React from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
 import sock from "../config/socket";
 import Banner from "../components/Banner";
-import {useUserContext} from "../context/user.js"
+import { useUserContext } from "../context/user.js";
 
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -15,7 +15,7 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
 
@@ -25,7 +25,7 @@ export default function StudentLogin() {
   /**
    * User's global credentials. For use in multiple sections across app.
    */
-  const { setSessionID, setInstructor } = useUserContext();
+  const { setSessionID, setInstructor, setLoggedIn } = useUserContext();
 
   setInstructor(false);
 
@@ -52,8 +52,10 @@ export default function StudentLogin() {
         pathname: "/session-introduction",
         query: { sessionID: studentCredentials.sessionID },
       });
+
       setSessionID(studentCredentials.sessionID);
       setLoginSuccess(true);
+      setLoggedIn(true);
     } else {
       setStudentCredentials({
         sessionID: "",
@@ -61,7 +63,7 @@ export default function StudentLogin() {
       });
       setLoginSuccess(false);
     }
-  }
+  };
 
   /**
    * MUI TextField save content.
@@ -94,7 +96,7 @@ export default function StudentLogin() {
     sock.send(JSON.stringify(sendobj));
 
     // TODO: Why on earth would you want to clear this value here???
-/*    setStudentCredentials({
+    /*    setStudentCredentials({
       sessionID: "",
       roomName: "",
     });*/
@@ -152,11 +154,11 @@ export default function StudentLogin() {
               onChange={saveText}
             />
             <div>
-              {isLoginSuccess ? null :
+              {isLoginSuccess ? null : (
                 <span className="loginError">
                   Please enter a valid session ID and room name
                 </span>
-              }
+              )}
             </div>
             <Button
               onClick={handleJoinRoom}

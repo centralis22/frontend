@@ -58,7 +58,12 @@ function IntroductionTable() {
         <TableBody>
           <TableRow>
             <TableCell
-              sx={{ border: 1, fontSize: "18px", bgcolor: "#f5f5f5" }}
+              sx={{
+                border: 1,
+                borderColor: "white",
+                fontSize: "18px",
+                bgcolor: "#f5f5f5",
+              }}
               align="left"
             >
               <ul>
@@ -67,7 +72,12 @@ function IntroductionTable() {
               </ul>
             </TableCell>
             <TableCell
-              sx={{ border: 1, fontSize: "18px", bgcolor: "#f5f5f5" }}
+              sx={{
+                border: 1,
+                borderColor: "white",
+                fontSize: "18px",
+                bgcolor: "#f5f5f5",
+              }}
               align="left"
             >
               <ul>
@@ -77,7 +87,12 @@ function IntroductionTable() {
               </ul>
             </TableCell>
             <TableCell
-              sx={{ border: 1, fontSize: "18px", bgcolor: "#f5f5f5" }}
+              sx={{
+                border: 1,
+                borderColor: "white",
+                fontSize: "18px",
+                bgcolor: "#f5f5f5",
+              }}
               align="left"
             >
               <ul>

@@ -45,7 +45,7 @@ export default function SessionIntroduction() {
           <p className="introductionTitle">Centralis Team Exercise: Overview</p>
           <IntroductionTable />
         </div>
-        <span style={{ fontSize: "25px", marginTop: "20px" }}>
+        <span style={{ fontSize: "23px", marginTop: "80px" }}>
           Please discuss your roles with your team while you wait for the
           activity to start.
         </span>

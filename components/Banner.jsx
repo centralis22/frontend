@@ -6,10 +6,10 @@ import { useUserContext } from "../context/user";
 function Banner() {
   const router = useRouter();
 
-  const { isInstructor, sessionID } = useUserContext();
+  const { isInstructor, sessionID, isLoggedIn } = useUserContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
 
-  var isSession = isInstructor;
+  var isSession = isLoggedIn;
 
   function handleLogout() {
     if (isInstructor) {
