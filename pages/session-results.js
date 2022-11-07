@@ -12,17 +12,10 @@ export default function SessionResults() {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
-      fetch(parsedData.status_message).then((response) => {
-        response.blob().then((blob) => {
-          let url = window.URL.createObjectURL(blob);
-          let a = document.createElement("a");
-          a.href = url;
-          //a.download = "employees.json";
-          a.click();
-        });
-        
-        window.location.href = response.url;
-      });
+      var link = document.createElement("a");
+      link.href = parsedData.status_message;
+
+      link.click();
     }
   };
 
