@@ -40,7 +40,7 @@ function Survey({ surveyNumber, user }) {
       request_id: 4877,
       request: "submit_poll",
       content: {
-        poll_no: {surveyNumber},
+        poll_no: surveyNumber,
         poll_response: tempArray,
       },
     };
