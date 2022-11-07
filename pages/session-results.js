@@ -2,10 +2,30 @@ import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import SessionLayout from "../components/SessionLayout";
+import sock from "../config/socket";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 
 export default function SessionResults() {
   const router = useRouter();
+
+  sock.onmessage = function (e) {
+    var parsedData = JSON.parse(e.data);
+
+    if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
+      
+    }
+  };
+
+  function handleDownload(event){
+    event.preventDefault();
+
+    var sendobj = {
+      request_id: 4888,
+      request: "download_results",
+    };
+
+    sock.send(JSON.stringify(sendobj));
+  }
 
   const pageURL = "/session-results";
   const pageIdx = SESSION_PAGE_URLS.indexOf(pageURL);
@@ -18,7 +38,9 @@ export default function SessionResults() {
       <Head>
         <title>Results</title>
       </Head>
-      <div>Welcome to the results page!</div>
+      <button className="resultsDownloadButton" onClick={handleDownload}>
+        Download Results
+      </button>
     </SessionLayout>
   );
 }

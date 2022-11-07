@@ -110,7 +110,8 @@ body {
   border-radius: 5px;
 }
 
-.LogoutButton:hover {
+.LogoutButton,
+.resultsDownloadButton:hover {
   color: rgb(255, 255, 0);
   background-color: #9a2323;
   cursor: pointer;
@@ -203,4 +204,14 @@ body {
   font-weight: bold;
   font-size: 50px;
   margin-bottom: 20px;
+}
+
+.resultsDownloadButton {
+  background-color: #850000;
+  color: white;
+  font-size: 18px;
+  width: 200px;
+  height: 60px;
+  border-color: black;
+  border-radius: 5px;
 }
