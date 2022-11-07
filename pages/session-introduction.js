@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
 import { useUserContext } from "../context/user";
 import sock from "../config/socket";
+import IntroductionTable from "../components/IntroductionTable";
 
 export default function SessionIntroduction() {
   const router = useRouter();
@@ -40,13 +40,15 @@ export default function SessionIntroduction() {
       <Head>
         <title>Welcome</title>
       </Head>
-      <div className="pageImage">
-        <Image
-          src="/welcome_page.jpg"
-          alt="logo"
-          height="300px"
-          width="1000px"
-        />
+      <div className="pageIntroduction">
+        <div className="surveyBox">
+          <p className="introductionTitle">Centralis Team Exercise: Overview</p>
+          <IntroductionTable />
+        </div>
+        <span style={{ fontSize: "25px", marginTop: "20px" }}>
+          Please discuss your roles with your team while you wait for the
+          activity to start.
+        </span>
       </div>
     </SessionLayout>
   );

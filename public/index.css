@@ -116,11 +116,20 @@ body {
   cursor: pointer;
 }
 
-.pageImage, .pageSurvey{
+.pageIntroduction,
+.pageBreakingNews,
+.pageSurvey {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.introductionTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin-bottom: 20px;
 }
 
 .surveyBox {
@@ -137,7 +146,7 @@ body {
   margin-bottom: 20px;
 }
 
-.surveyWarning{
+.surveyWarning {
   margin-left: 50px;
   font-size: 18px;
   font-weight: bold;
@@ -145,7 +154,7 @@ body {
   color: #850000;
 }
 
-.surveyQuestion{
+.surveyQuestion {
   margin-left: 50px;
   font-size: 20px;
   margin-bottom: 10px;
@@ -185,7 +194,7 @@ body {
   border-radius: 5px;
 }
 
-.surveySubmitButton:hover{
+.surveySubmitButton:hover {
   cursor: pointer;
 }
 

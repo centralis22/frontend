@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import sock from "../config/socket";
-import Image from "next/image";
 import SessionLayout from "../components/SessionLayout";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
@@ -38,9 +37,9 @@ export default function StudentBreakingNews() {
       <Head>
         <title>Breaking News</title>
       </Head>
-      <div className="pageImage">
+      <div className="pageBreakingNews">
         <div className="surveyBox">
-          <p className="breakingNewsTitle">Breaking News</p>
+          <p className="breakingNewsTitle">Breaking News!</p>
           <span
             style={{ fontSize: "25px", fontWeight: "bold", color: "#850000" }}
           >
