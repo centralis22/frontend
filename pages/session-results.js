@@ -5,8 +5,6 @@ import SessionLayout from "../components/SessionLayout";
 import sock from "../config/socket";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
-import axios from 'axios';
-import fileDownload from 'js-file-download';
 
 export default function SessionResults() {
   const router = useRouter();
@@ -14,24 +12,21 @@ export default function SessionResults() {
   const { sessionID } = useUserContext();
   var filename = toString(sessionID);
 
-  const DownloadFile = (filename) => {
-    let url = 'http://localhost:8080/downloadFile/' + filename;
-    return axios.get(url, { responseType: 'arraybuffer' }).then((response) => {
-        return response;
-    })};
-
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
-      DownloadFile().then(
-        (response) => {
-            fileDownload(response.data, filename);
-        }
-        , (error) => {
-            // ERROR 
-            alert("Error downloading file");
+      fetch("http://localhost:8080/downloadFile/534639").then((response) => {
+        response.blob().then((blob) => {
+          let url = window.URL.createObjectURL(blob);
+          let a = document.createElement("a");
+          a.href = url;
+          a.download = "534639.zip";
+          a.click();
         });
+        
+        window.location.href = response.url;
+      });
     }
   };
 
