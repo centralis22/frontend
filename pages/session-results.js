@@ -4,16 +4,19 @@ import Head from "next/head";
 import SessionLayout from "../components/SessionLayout";
 import sock from "../config/socket";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
+import { useUserContext } from "../context/user";
 
 export default function SessionResults() {
   const router = useRouter();
+
+  const { sessionID } = useUserContext();
 
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
       router.push({
-        pathname: "../downloadFile/" + parsedData.status_message + ".zip",
+        pathname: "../downloadFile/" + toString(sessionID) + ".zip",
       });
     }
   };
