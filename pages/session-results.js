@@ -5,19 +5,32 @@ import SessionLayout from "../components/SessionLayout";
 import sock from "../config/socket";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
+import axios from 'axios';
+import fileDownload from 'js-file-download';
 
 export default function SessionResults() {
   const router = useRouter();
 
   const { sessionID } = useUserContext();
+  var filename = toString(sessionID) + ".zip";
+
+  const DownloadFile = (filename) => {
+    let url = 'http://localhost:3000/downloadFile/' + toString(sessionID) + ".zip";
+    return axios.get(url, { responseType: 'arraybuffer' }).then((response) => {
+        return response;
+    })};
 
   sock.onmessage = function (e) {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
-      router.push({
-        pathname: "../downloadFile/" + toString(sessionID) + ".zip",
-      });
+      DownloadFile().then(
+        (response) => {
+            fileDownload(response.data, filename);
+        }
+        , (error) => {
+            // ERROR 
+        });
     }
   };
 
