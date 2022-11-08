@@ -12,10 +12,9 @@ export default function SessionResults() {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
-      var link = document.createElement("a");
-      link.href = parsedData.status_message;
-
-      link.click();
+      router.push({
+        pathname: "../downloadFile/" + parsedData.status_message + ".zip",
+      });
     }
   };
 
