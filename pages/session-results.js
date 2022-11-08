@@ -15,7 +15,7 @@ export default function SessionResults() {
   var filename = toString(sessionID);
 
   const DownloadFile = (filename) => {
-    let url = 'http://localhost:8080/downloadFile/' + toString(sessionID);
+    let url = 'http://localhost:8080/downloadFile/' + filename;
     return axios.get(url, { responseType: 'arraybuffer' }).then((response) => {
         return response;
     })};
