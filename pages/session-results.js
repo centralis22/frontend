@@ -12,10 +12,10 @@ export default function SessionResults() {
   const router = useRouter();
 
   const { sessionID } = useUserContext();
-  var filename = toString(sessionID) + ".zip";
+  var filename = toString(sessionID);
 
   const DownloadFile = (filename) => {
-    let url = 'http://localhost:3000/downloadFile/' + toString(sessionID) + ".zip";
+    let url = 'http://localhost:8080/downloadFile/' + toString(sessionID);
     return axios.get(url, { responseType: 'arraybuffer' }).then((response) => {
         return response;
     })};
@@ -30,6 +30,7 @@ export default function SessionResults() {
         }
         , (error) => {
             // ERROR 
+            alert("Error downloading file");
         });
     }
   };
