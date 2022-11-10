@@ -119,7 +119,8 @@ body {
 
 .pageIntroduction,
 .pageBreakingNews,
-.pageSurvey {
+.pageSurvey,
+.pageThankYou {
   display: flex;
   align-items: center;
   justify-content: center;

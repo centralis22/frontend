@@ -54,6 +54,11 @@ function Survey({ surveyNumber, user }) {
       question4: "",
       question5: "",
     });
+
+    router.push({
+      pathname: "/session-thank-you",
+      query: { sessionID: router.query.sessionID, surveyNumber: surveyNumber },
+    });
   }
 
   return (
