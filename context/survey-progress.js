@@ -6,7 +6,7 @@ const SurveyProgressContext = React.createContext({
 });
 
 export function SurveyProgressContextProvider({ children }) {
-  const [survey1Progress, setSurvey1Progress] = useState(0);
+  const [survey1Progress, setSurvey1Progress] = useState([]);
 
 
   const surveyProgressValues = {

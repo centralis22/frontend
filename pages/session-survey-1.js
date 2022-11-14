@@ -7,8 +7,7 @@ import { useUserContext } from "../context/user";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
 import Image from "next/image";
-
-const sessionStatusArray = [];
+import { useSurveyProgressContext } from "../context/survey-progress";
 
 export default function SessionSurvey1() {
   const router = useRouter();
@@ -17,8 +16,20 @@ export default function SessionSurvey1() {
   const pageIdx = SESSION_PAGE_URLS.indexOf(pageURL);
 
   const { isInstructor } = useUserContext();
+  const { survey1Progress, setSurvey1Progress } = useSurveyProgressContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
 
+  // Add new SOCKET_BROADCAST_METHOD to retrieve team survey progress.
+  useEffect(() => {
+    function broadcastSurveyProgressHandler(parsedData) {
+      if (isInstructor) {
+        setSurvey1Progress(prevState => {
+          return [...prevState, parsedData.content[1]];
+        });
+      }
+    }
+    SOCKET_BROADCAST_METHODS.set("survey_progress", broadcastSurveyProgressHandler);
+  }, []);
 
 
   return (
@@ -33,8 +44,8 @@ export default function SessionSurvey1() {
         <div className="pageInstructorSurvey">
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 1 Submission Status</p>
-            {sessionStatusArray.map((roomName) => (
-              <div>
+            {survey1Progress.map((roomName, key) => (
+              <div key={key}>
                 <span>Room {roomName} has submitted Survey 1!</span>
                 <br />
               </div>

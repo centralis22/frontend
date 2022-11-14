@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -30,7 +30,9 @@ export default function InstructorLogin() {
    */
   const { setSessionID, setInstructor, setLoggedIn } = useUserContext();
 
-  setInstructor(true);
+  useEffect(() => {
+    setInstructor(true);
+  }, []);
 
   // TODO: Add similar error message display for instructor.
 
@@ -50,13 +52,13 @@ export default function InstructorLogin() {
 
     //Push user to the existed session
     if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
+      // Set must be done before push!
+      setSessionID(tempSession);
+      setLoggedIn(true);
       router.push({
         pathname: "/session-introduction",
         query: { sessionID: tempSession, sessionProgress: 0 },
       });
-
-      setSessionID(tempSession);
-      setLoggedIn(true);
     } else if (
       parsedData.respond_id === 4871 &&
       parsedData.status_code === 200
@@ -66,13 +68,11 @@ export default function InstructorLogin() {
 
       // FIXME: Critical error, pushed to intro page, without login.
       // Fix in either front-end or backend.
-
+      setLoggedIn(true);
       router.push({
         pathname: "/session-introduction",
         query: { sessionID: parsedData.content, sessionProgress: 0 },
       });
-
-      setLoggedIn(true);
     } else if (
       (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
       parsedData.status_code === 403

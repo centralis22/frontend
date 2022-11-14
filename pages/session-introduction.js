@@ -15,7 +15,7 @@ export default function SessionIntroduction() {
 
   const { sessionID, isInstructor } = useUserContext();
 
-  // Add new SOCKET_BROADCAST_METHOD on component mount.
+  // Add new SOCKET_BROADCAST_METHOD to push next page.
   useEffect(() => {
     function broadcastAdvanceStageHandler(parsedData) {
       // scope of isInstructor, router ???
@@ -38,7 +38,9 @@ export default function SessionIntroduction() {
       let parsedData = JSON.parse(e.data);
       if (parsedData.hasOwnProperty("broadcast")) {
         let callbackFunc = SOCKET_BROADCAST_METHODS.get(parsedData.broadcast);
-        callbackFunc(parsedData);
+        if (callbackFunc !== undefined) {
+          callbackFunc(parsedData);
+        }
       }
     };
   }, []);
