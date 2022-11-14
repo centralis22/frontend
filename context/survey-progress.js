@@ -3,14 +3,17 @@ import React, { useState } from "react";
 const SurveyProgressContext = React.createContext({
   survey1Progress: [],
   setSurvey1Progress: () => [],
+  survey2Progress: [],
+  setSurvey2Progress: () => [],
 });
 
 export function SurveyProgressContextProvider({ children }) {
   const [survey1Progress, setSurvey1Progress] = useState([]);
-
+  const [survey2Progress, setSurvey2Progress] = useState([]);
 
   const surveyProgressValues = {
     survey1Progress, setSurvey1Progress,
+    survey2Progress, setSurvey2Progress,
   };
 
   return (

@@ -7,8 +7,7 @@ import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
 import SessionLayout from "../components/SessionLayout";
 import Image from "next/image";
-
-const sessionStatusArray = [];
+import { useSurveyProgressContext } from "../context/survey-progress";
 
 export default function SessionSurvey2() {
   const router = useRouter();
@@ -17,9 +16,8 @@ export default function SessionSurvey2() {
   const pageIdx = SESSION_PAGE_URLS.indexOf(pageURL);
 
   const { isInstructor } = useUserContext();
+  const { survey2Progress } = useSurveyProgressContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
-
-
 
   return (
     <SessionLayout
@@ -33,7 +31,7 @@ export default function SessionSurvey2() {
         <div className="pageInstructorSurvey">
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 2 Submission Status</p>
-            {sessionStatusArray.map((roomName) => (
+            {survey2Progress.map((roomName) => (
               <span>Room {roomName} has submitted Survey 2!</span>
             ))}
           </div>
