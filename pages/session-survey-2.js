@@ -6,6 +6,9 @@ import Survey from "../components/Survey";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
 import SessionLayout from "../components/SessionLayout";
+import Image from "next/image";
+
+const sessionStatusArray = [];
 
 export default function SessionSurvey2() {
   const router = useRouter();
@@ -29,7 +32,7 @@ export default function SessionSurvey2() {
         }
       };
     }
-  }, []);
+  }, [isInstructor, router]);
 
   return (
     <SessionLayout
@@ -39,7 +42,26 @@ export default function SessionSurvey2() {
       <Head>
         <title>Survey 2</title>
       </Head>
-      <Survey surveyNumber="2" user={userTypeStr} />
+      {isInstructor ? (
+        <div className="pageInstructorSurvey">
+          <div className="sessionStatusBox">
+            <p className="sessionStatusBoxTitle">Survey 2 Submission Status</p>
+            {sessionStatusArray.map((roomName) => (
+              <span>Room {roomName} has submitted Survey 2!</span>
+            ))}
+          </div>
+          <div>
+            <Image
+              src="/mini-survey2.png"
+              alt="logo"
+              height="300px"
+              width="400px"
+            />
+          </div>
+        </div>
+      ) : (
+        <Survey surveyNumber="2" user={userTypeStr} />
+      )}
     </SessionLayout>
   );
 }

@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import Head from 'next/head';
+import Head from "next/head";
 import sock from "../config/socket";
 import Survey from "../components/Survey";
 import { useUserContext } from "../context/user";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
+import Image from "next/image";
+
+const sessionStatusArray = [];
 
 export default function SessionSurvey1() {
   const router = useRouter();
@@ -27,9 +30,9 @@ export default function SessionSurvey1() {
             query: { sessionID: router.query.sessionID },
           });
         }
-      }
+      };
     }
-  }, []);
+  }, [isInstructor, router]);
 
   return (
     <SessionLayout
@@ -39,7 +42,26 @@ export default function SessionSurvey1() {
       <Head>
         <title>Survey 1</title>
       </Head>
-      <Survey surveyNumber="1" user={userTypeStr} />
+      {isInstructor ? (
+        <div className="pageInstructorSurvey">
+          <div className="sessionStatusBox">
+            <p className="sessionStatusBoxTitle">Survey 1 Submission Status</p>
+            {sessionStatusArray.map((roomName) => (
+              <span>Room {roomName} has submitted Survey 1!</span>
+            ))}
+          </div>
+          <div>
+            <Image
+              src="/mini-survey1.png"
+              alt="logo"
+              height="300px"
+              width="400px"
+            />
+          </div>
+        </div>
+      ) : (
+        <Survey surveyNumber="1" user={userTypeStr} />
+      )}
     </SessionLayout>
   );
 }
