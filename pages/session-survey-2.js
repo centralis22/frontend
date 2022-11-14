@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import sock, { SOCKET_BROADCAST_METHODS } from "../config/socket";
+import sock, { socketBroadcastMethods } from "../config/socket";
 import SurveyStudent from "../components/SurveyStudent";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";

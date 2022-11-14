@@ -4,7 +4,7 @@ import Head from "next/head";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
 import { useUserContext } from "../context/user";
-import sock, { SOCKET_BROADCAST_METHODS } from "../config/socket";
+import sock, { socketBroadcastMethods } from "../config/socket";
 import IntroductionTable from "../components/IntroductionTable";
 
 export default function SessionIntroduction() {
@@ -26,7 +26,7 @@ export default function SessionIntroduction() {
         });
       }
     }
-    SOCKET_BROADCAST_METHODS.set("advance_stage", broadcastAdvanceStageHandler);
+    socketBroadcastMethods.set("advance_stage", broadcastAdvanceStageHandler);
   }, []);
 
   // Set sock.onmessage on component first mount.
@@ -37,7 +37,7 @@ export default function SessionIntroduction() {
     sock.onmessage = function (e) {
       let parsedData = JSON.parse(e.data);
       if (parsedData.hasOwnProperty("broadcast")) {
-        let callbackFunc = SOCKET_BROADCAST_METHODS.get(parsedData.broadcast);
+        let callbackFunc = socketBroadcastMethods.get(parsedData.broadcast);
         if (callbackFunc !== undefined) {
           callbackFunc(parsedData);
         }
