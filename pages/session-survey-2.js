@@ -32,7 +32,10 @@ export default function SessionSurvey2() {
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 2 Submission Status</p>
             {survey2Progress.map((roomName) => (
-              <span>Room {roomName} has submitted Survey 2!</span>
+              <div key={key}>
+                <span>Room {roomName} has submitted Survey 2!</span>
+                <br />
+              </div>
             ))}
           </div>
           <div>

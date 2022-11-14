@@ -12,10 +12,6 @@ export default function StudentBreakingNews() {
   const pageURL = "/session-breaking-news";
   const pageIdx = SESSION_PAGE_URLS.indexOf(pageURL);
 
-  const { sessionID, isInstructor } = useUserContext();
-
-
-
   return (
     <SessionLayout
       pageID={pageIdx}

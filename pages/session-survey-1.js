@@ -38,6 +38,7 @@ export default function SessionSurvey1() {
     SOCKET_BROADCAST_METHODS.set("survey_progress", broadcastSurveyProgressHandler);
   }, []);
 
+  // TODO: Move instructor portion to components/SurveyInstructor, for survey 1 and 2
   return (
     <SessionLayout
       pageID={pageIdx}

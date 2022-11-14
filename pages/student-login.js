@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
@@ -27,7 +27,9 @@ export default function StudentLogin() {
    */
   const { setSessionID, setInstructor, setLoggedIn } = useUserContext();
 
-  setInstructor(false);
+  useEffect(() => {
+    setInstructor(false);
+  }, []);
 
   /**
    * Student's login status. Displays an error message on false.
