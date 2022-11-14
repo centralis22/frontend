@@ -8,7 +8,7 @@ import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
 import Image from "next/image";
 
-const sessionStatusArray = [];
+const sessionStatusArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
 export default function SessionSurvey1() {
   const router = useRouter();
