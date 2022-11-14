@@ -47,7 +47,10 @@ export default function SessionSurvey1() {
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 1 Submission Status</p>
             {sessionStatusArray.map((roomName) => (
-              <span>Room {roomName} has submitted Survey 1!</span>
+              <div>
+                <span>Room {roomName} has submitted Survey 1!</span>
+                <br />
+              </div>
             ))}
           </div>
           <div>
