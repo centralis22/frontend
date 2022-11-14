@@ -8,7 +8,7 @@ import { useUserContext } from "../context/user";
 import SessionLayout from "../components/SessionLayout";
 import Image from "next/image";
 
-const sessionStatusArray = [];
+const sessionStatusArray = ["A", "B", "C", "D", "E", "F", "G"];
 
 export default function SessionSurvey2() {
   const router = useRouter();
@@ -47,7 +47,10 @@ export default function SessionSurvey2() {
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 2 Submission Status</p>
             {sessionStatusArray.map((roomName) => (
-              <span>Room {roomName} has submitted Survey 2!</span>
+              <div>
+                <span>Room {roomName} has submitted Survey 2!</span>
+                <br />
+              </div>
             ))}
           </div>
           <div>
