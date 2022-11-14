@@ -42,8 +42,7 @@ export default function StudentThankYou() {
           ) : (
             <span style={{ fontSize: "25px", fontWeight: "bold" }}>
               Thank you for submitting Survey 2! You have now completed the
-              session. Please wait for further instructions fromt the
-              instructor.
+              session. Please wait for further instructions from the instructor.
             </span>
           )}
         </div>
