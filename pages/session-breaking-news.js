@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import sock from "../config/socket";
+import sock, { SOCKET_BROADCAST_METHODS } from "../config/socket";
 import SessionLayout from "../components/SessionLayout";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import { useUserContext } from "../context/user";
@@ -14,20 +14,7 @@ export default function StudentBreakingNews() {
 
   const { sessionID, isInstructor } = useUserContext();
 
-  useEffect(() => {
-    if (!isInstructor) {
-      sock.onmessage = function (e) {
-        var parsedData = JSON.parse(e.data);
 
-        if (parsedData.broadcast === "advance_stage") {
-          router.push({
-            pathname: SESSION_PAGE_URLS[parsedData.content],
-            query: { sessionID: router.query.sessionID },
-          });
-        }
-      };
-    }
-  }, []);
 
   return (
     <SessionLayout

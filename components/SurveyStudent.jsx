@@ -2,12 +2,12 @@ import React from "react";
 import { useRouter } from "next/router";
 import sock from "../config/socket";
 
-function Survey({ surveyNumber, user }) {
+function SurveyStudent({ surveyNumber, user }) {
   var router = useRouter();
   var isStudent = user === "Student";
 
   /**
-   * Survey answers.
+   * SurveyStudent answers.
    */
   const [answer, setAnswer] = React.useState({
     question1: "",
@@ -224,4 +224,4 @@ function Survey({ surveyNumber, user }) {
   );
 }
 
-export default Survey;
+export default SurveyStudent;

@@ -1,10 +1,13 @@
-import {UserContextProvider} from '../context/user'
+import { UserContextProvider } from '../context/user'
+import { SurveyProgressContextProvider } from '../context/survey-progress'
 
 export default function App({Component, pageProps}) {
 
   return (
     <UserContextProvider>
-      <Component {...pageProps} />
+      <SurveyProgressContextProvider>
+        <Component {...pageProps} />
+      </SurveyProgressContextProvider>
     </UserContextProvider>
   )
 }

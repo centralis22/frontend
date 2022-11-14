@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import sock from "../config/socket";
-import Survey from "../components/Survey";
+import sock, { SOCKET_BROADCAST_METHODS } from "../config/socket";
+import SurveyStudent from "../components/SurveyStudent";
 import { useUserContext } from "../context/user";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
@@ -19,20 +19,7 @@ export default function SessionSurvey1() {
   const { isInstructor } = useUserContext();
   const userTypeStr = isInstructor ? "Instructor" : "Student";
 
-  useEffect(() => {
-    if (!isInstructor) {
-      sock.onmessage = function (e) {
-        var parsedData = JSON.parse(e.data);
 
-        if (parsedData.broadcast === "advance_stage") {
-          router.push({
-            pathname: SESSION_PAGE_URLS[parsedData.content],
-            query: { sessionID: router.query.sessionID },
-          });
-        }
-      };
-    }
-  }, [isInstructor, router]);
 
   return (
     <SessionLayout
@@ -63,7 +50,7 @@ export default function SessionSurvey1() {
           </div>
         </div>
       ) : (
-        <Survey surveyNumber="1" user={userTypeStr} />
+        <SurveyStudent surveyNumber="1" user={userTypeStr} />
       )}
     </SessionLayout>
   );

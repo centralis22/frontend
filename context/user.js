@@ -17,7 +17,7 @@ const UserContext = React.createContext({
   setLoggedIn: () => {},
 });
 
-export function UserContextProvider({children}) {
+export function UserContextProvider({ children }) {
   const [sessionID, setSessionID] = useState(0);
   const [isInstructor, setInstructor] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
