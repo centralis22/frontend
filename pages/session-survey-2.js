@@ -31,7 +31,7 @@ export default function SessionSurvey2() {
         <div className="pageInstructorSurvey">
           <div className="sessionStatusBox">
             <p className="sessionStatusBoxTitle">Survey 2 Submission Status</p>
-            {survey2Progress.map((roomName) => (
+            {survey2Progress.map((roomName, key) => (
               <div key={key}>
                 <span>Room {roomName} has submitted Survey 2!</span>
                 <br />
