@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
-import sock from "../config/socket";
+import sock, { generateSocketRequestID, socketRespondMethods } from "../config/socket";
 import Banner from "../components/Banner";
 
 import Avatar from "@mui/material/Avatar";
@@ -19,8 +19,7 @@ import { useUserContext } from "../context/user";
 
 const theme = createTheme();
 
-var tempSession = "";
-
+// TODO: Add similar error message display for instructor.
 //Class function starts here
 export default function InstructorLogin() {
   var router = useRouter();
@@ -34,9 +33,6 @@ export default function InstructorLogin() {
     setInstructor(true);
   }, []);
 
-  // TODO: Add similar error message display for instructor.
-
-  // TODO: Modify instructor login to useState() instead of global variables.
   /**
    * Student's credentials. Contains session ID and room name.
    */
@@ -46,62 +42,71 @@ export default function InstructorLogin() {
     sessionID: "",
   });
 
-  // TODO: Format this.
-  sock.onmessage = function (e) {
-    var parsedData = JSON.parse(e.data);
-
-    //Push user to the existed session
-    if (parsedData.respond_id === 4870 && parsedData.status_code === 200) {
-      // Set must be done before push!
-      setSessionID(tempSession);
-      setLoggedIn(true);
-      router.push({
-        pathname: "/session-introduction",
-        query: { sessionID: tempSession, sessionProgress: 0 },
-      });
-    } else if (
-      parsedData.respond_id === 4871 &&
-      parsedData.status_code === 200
-    ) {
-      //Push user to the newly created random session
-      alert("Your new session ID is: " + parsedData.content);
-
-      // FIXME: Critical error, pushed to intro page, without login.
-      // Fix in either front-end or backend.
-      setLoggedIn(true);
-      router.push({
-        pathname: "/session-introduction",
-        query: { sessionID: parsedData.content, sessionProgress: 0 },
-      });
-    } else if (
-      (parsedData.respond_id === 4870 || parsedData.respond_id === 4871) &&
-      parsedData.status_code === 403
-    ) {
+  // Adds respond handler for instructor login and create session.
+  useEffect(() => {
+    function errCredential403() {
       alert("Wrong login credentials given, please try again.");
       setInstructorCredentials({
         username: "",
         password: "",
         sessionID: "",
       });
-    } else if (
-      parsedData.respond_id === 4870 &&
-      parsedData.status_code === 400
-    ) {
-      alert("Joined a session that does not exist.");
-      setInstructorCredentials({
-        username: "",
-        password: "",
-        sessionID: "",
-      });
-    } else if (parsedData.status_code === 500) {
-      alert("Login failed");
-      setInstructorCredentials({
-        username: "",
-        password: "",
-        sessionID: "",
-      });
     }
-  };
+
+    function respondInstructorLoginHandler(parsedData) {
+      // Success
+      if (parsedData.status_code === 200) {
+        setSessionID(instructorCredentials.sessionID);
+        setLoggedIn(true);
+        router.push({
+          pathname: "/session-introduction",
+          query: { sessionID: instructorCredentials.sessionID, sessionProgress: 0 },
+        });
+      }
+      else if (parsedData.status_code === 400) {
+        alert("Joined a session that does not exist.");
+        setInstructorCredentials({
+          username: "",
+          password: "",
+          sessionID: "",
+        });
+      }
+      else if (parsedData.status_code === 403) {
+        errCredential403();
+      }
+      else {
+        alert("Unknown error.");
+      }
+    }
+
+    function respondCreateSessionHandler(parsedData) {
+      if (parsedData.status_code === 200) {
+        //Push user to the newly created random session
+        alert("Your new session ID is: " + parsedData.content);
+        setSessionID(parsedData.content)
+        setLoggedIn(true);
+        router.push({
+          pathname: "/session-introduction",
+          query: { sessionID: parsedData.content, sessionProgress: 0 },
+        });
+      }
+      else if (parsedData.status_code === 403) {
+        errCredential403();
+      }
+      else {
+        alert("Unknown error.");
+      }
+    }
+
+    socketRespondMethods.set("login", respondInstructorLoginHandler);
+    socketRespondMethods.set("create_session", respondCreateSessionHandler);
+
+    return () => {
+      socketRespondMethods.delete("login");
+      socketRespondMethods.delete("create_session");
+    }
+  }, [instructorCredentials]);
+
 
   function saveText(event) {
     const { value, name } = event.target;
@@ -114,11 +119,8 @@ export default function InstructorLogin() {
   function handleSignIn(event) {
     event.preventDefault();
 
-    // TODO: Remove.
-    tempSession = instructorCredentials.sessionID;
-
-    var sendobj = {
-      request_id: 4870,
+    let sendobj = {
+      request_id: generateSocketRequestID("login"),
       request: "login",
       content: {
         user_type: "admin",
@@ -129,13 +131,6 @@ export default function InstructorLogin() {
     };
 
     sock.send(JSON.stringify(sendobj));
-
-    // TODO: DO NOT CLEAR CREDENTIALS HERE! CLEAR ONLY AFTER FAILED LOGIN.
-    setInstructorCredentials({
-      username: "",
-      password: "",
-      sessionID: "",
-    });
   }
 
   /**
@@ -144,8 +139,8 @@ export default function InstructorLogin() {
   function handleCreateSession(event) {
     event.preventDefault();
 
-    var sendobj = {
-      request_id: 4871,
+    let sendobj = {
+      request_id: generateSocketRequestID("create_session"),
       request: "create_session",
       content: {
         user_type: "admin",

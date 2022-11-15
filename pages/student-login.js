@@ -80,7 +80,8 @@ export default function StudentLogin() {
       // Remove student login on component dismount.
       socketRespondMethods.delete("login");
     }
-  }, []);
+    // Dependency is required to regenerate function and reference.
+  }, [studentCredentials]);
 
 
   // Set sock.onmessage on component first mount.
@@ -93,7 +94,6 @@ export default function StudentLogin() {
   useEffect(() => {
     sock.onmessage = function (e) {
       let parsedData = JSON.parse(e.data);
-
       if (parsedData.hasOwnProperty("respond_id")) {
         let requestType = getRequestType(parsedData.respond_id);
         let callbackFunc = socketRespondMethods.get(requestType);
@@ -126,7 +126,6 @@ export default function StudentLogin() {
    */
   function handleJoinRoom(event) {
     event.preventDefault();
-
     let sendobj = {
       request_id: generateSocketRequestID("login"),
       request: "login",

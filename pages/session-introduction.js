@@ -29,21 +29,6 @@ export default function SessionIntroduction() {
     socketBroadcastMethods.set("advance_stage", broadcastAdvanceStageHandler);
   }, []);
 
-  // Set sock.onmessage on component first mount.
-  // sock.onmessage is global, no need to set on each page.
-  // Note, this effect with []-dependency triggers on EACH MOUNT, i.e. after router.push,
-  // but NOT on each render.
-  useEffect(() => {
-    sock.onmessage = function (e) {
-      let parsedData = JSON.parse(e.data);
-      if (parsedData.hasOwnProperty("broadcast")) {
-        let callbackFunc = socketBroadcastMethods.get(parsedData.broadcast);
-        if (callbackFunc !== undefined) {
-          callbackFunc(parsedData);
-        }
-      }
-    };
-  }, []);
 
   return (
     <SessionLayout
