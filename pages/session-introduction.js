@@ -15,10 +15,10 @@ export default function SessionIntroduction() {
 
   const { sessionID, isInstructor } = useUserContext();
 
+  // TODO: This code is better if moved to where instructor may change, i.e. SessionLayout when debugging.
   // Add new SOCKET_BROADCAST_METHOD to push next page.
   useEffect(() => {
     function broadcastAdvanceStageHandler(parsedData) {
-      // scope of isInstructor, router ???
       if (!isInstructor) {
         router.push({
           pathname: SESSION_PAGE_URLS[parsedData.content],

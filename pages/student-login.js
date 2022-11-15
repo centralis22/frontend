@@ -80,6 +80,7 @@ export default function StudentLogin() {
       // Remove student login on component dismount.
       socketRespondMethods.delete("login");
     }
+    // The reference only tracks the value at the time of function definition.
     // Dependency is required to regenerate function and reference.
   }, [studentCredentials]);
 
