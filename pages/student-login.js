@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
-import sock from "../config/socket";
+import sock, {
+  generateSocketRequestID,
+  getRequestType,
+  socketBroadcastMethods,
+  socketRespondMethods
+} from "../config/socket";
 import Banner from "../components/Banner";
 import { useUserContext } from "../context/user.js";
 
@@ -20,14 +25,18 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme();
 
 export default function StudentLogin() {
-  var router = useRouter();
+  let router = useRouter();
 
   /**
    * User's global credentials. For use in multiple sections across app.
    */
   const { setSessionID, setInstructor, setLoggedIn } = useUserContext();
 
-  setInstructor(false);
+  // Context get/set should happen after mount, not on render.
+  // Wrap in useEffect.
+  useEffect(() => {
+    setInstructor(false);
+  }, []);
 
   /**
    * Student's login status. Displays an error message on false.
@@ -41,30 +50,66 @@ export default function StudentLogin() {
     roomName: "",
   });
 
+
+  // Adds respond handler for student login.
+  useEffect(() => {
+    function respondStudentLoginHandler(parsedData) {
+      if (parsedData.status_code === 200) {
+        setSessionID(studentCredentials.sessionID);
+        setLoggedIn(true);
+        setLoginSuccess(true);
+
+        router.push({
+          pathname: "/session-introduction",
+          query: { sessionID: studentCredentials.sessionID },
+        });
+      }
+      else {
+        setLoginSuccess(false);
+        setStudentCredentials({
+          sessionID: "",
+          roomName: "",
+        });
+      }
+    }
+    socketRespondMethods.set("login", respondStudentLoginHandler);
+
+    // >>> If you don't understand, read this for return value.
+    // https://dmitripavlutin.com/react-useeffect-explanation/
+    return () => {
+      // Remove student login on component dismount.
+      socketRespondMethods.delete("login");
+    }
+    // The reference only tracks the value at the time of function definition.
+    // Dependency is required to regenerate function and reference.
+  }, [studentCredentials]);
+
+
+  // Set sock.onmessage on component first mount.
+  // sock.onmessage is global, no need to set on each page.
+  // Note, this effect with []-dependency triggers on EACH MOUNT, i.e. after router.push,
+  // but NOT on each render.
   /**
    * SockJS communication.
    */
-  sock.onmessage = function (e) {
-    var parsedData = JSON.parse(e.data);
-
-    if (parsedData.respond_id === 4869 && parsedData.status_code === 200) {
-      router.push({
-        pathname: "/session-introduction",
-        query: { sessionID: studentCredentials.sessionID },
-      });
-
-      setSessionID(studentCredentials.sessionID);
-      setLoginSuccess(true);
-      setLoggedIn(true);
-    } else {
-      setStudentCredentials({
-        sessionID: "",
-        roomName: "",
-      });
-      
-      setLoginSuccess(false);
-    }
-  };
+  useEffect(() => {
+    sock.onmessage = function (e) {
+      let parsedData = JSON.parse(e.data);
+      if (parsedData.hasOwnProperty("respond_id")) {
+        let requestType = getRequestType(parsedData.respond_id);
+        let callbackFunc = socketRespondMethods.get(requestType);
+        if (callbackFunc !== undefined) {
+          callbackFunc(parsedData);
+        }
+      }
+      else if (parsedData.hasOwnProperty("broadcast")) {
+        let callbackFunc = socketBroadcastMethods.get(parsedData.broadcast);
+        if (callbackFunc !== undefined) {
+          callbackFunc(parsedData);
+        }
+      }
+    };
+  }, []);
 
   /**
    * MUI TextField save content.
@@ -82,9 +127,8 @@ export default function StudentLogin() {
    */
   function handleJoinRoom(event) {
     event.preventDefault();
-
-    var sendobj = {
-      request_id: 4869,
+    let sendobj = {
+      request_id: generateSocketRequestID("login"),
       request: "login",
       content: {
         user_type: "student",

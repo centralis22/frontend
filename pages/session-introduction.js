@@ -4,7 +4,7 @@ import Head from "next/head";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
 import SessionLayout from "../components/SessionLayout";
 import { useUserContext } from "../context/user";
-import sock from "../config/socket";
+import sock, { socketBroadcastMethods } from "../config/socket";
 import IntroductionTable from "../components/IntroductionTable";
 
 export default function SessionIntroduction() {
@@ -15,22 +15,20 @@ export default function SessionIntroduction() {
 
   const { sessionID, isInstructor } = useUserContext();
 
-  // Set sock.onmessage effect on component mount.
+  // TODO: This code is better if moved to where instructor may change, i.e. SessionLayout when debugging.
+  // Add new SOCKET_BROADCAST_METHOD to push next page.
   useEffect(() => {
-    if (!isInstructor) {
-      sock.onmessage = function (e) {
-        console.log(e.data);
-        var parsedData = JSON.parse(e.data);
-
-        if (parsedData.broadcast === "advance_stage") {
-          router.push({
-            pathname: SESSION_PAGE_URLS[parsedData.content],
-            query: { sessionID: sessionID },
-          });
-        }
-      };
+    function broadcastAdvanceStageHandler(parsedData) {
+      if (!isInstructor) {
+        router.push({
+          pathname: SESSION_PAGE_URLS[parsedData.content],
+          query: { sessionID: sessionID },
+        });
+      }
     }
+    socketBroadcastMethods.set("advance_stage", broadcastAdvanceStageHandler);
   }, []);
+
 
   return (
     <SessionLayout
