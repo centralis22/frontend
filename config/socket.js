@@ -1,6 +1,6 @@
 import * as SockJS from "sockjs-client";
 
-const sock = new SockJS("http://localhost:8080/api");
+const sock = new SockJS("https://centralisbackend.elcexercises.org/api");
 
 /**
  * Maps broadcast type names to handling functions.
