@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import sock, { socketBroadcastMethods } from "../config/socket";
+import { socketBroadcastMethods } from "../config/socket";
 import SurveyStudent from "../components/SurveyStudent";
 import { useUserContext } from "../context/user";
 import { SESSION_PAGE_URLS } from "../components/PageDirectory";
@@ -36,7 +36,7 @@ export default function SessionSurvey1() {
       }
     }
     socketBroadcastMethods.set("survey_progress", broadcastSurveyProgressHandler);
-  }, []);
+  }, [isInstructor, setSurvey1Progress, setSurvey2Progress]);
 
   // TODO: Move instructor portion to components/SurveyInstructor, for survey 1 and 2
   return (

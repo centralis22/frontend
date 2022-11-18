@@ -28,9 +28,11 @@ function Banner() {
         <Image src="/usc-logo.png" alt="logo" height="55px" width="55px" />
       </div>
       <span className="BannerTitle">Centralis {userTypeStr}</span>
-      <div>
-        <p className="SessionNumber">Session #: {sessionID}</p>
-      </div>
+      {isLoggedIn ? (
+        <div>
+          <p className="SessionNumber">Session #: {sessionID}</p>
+        </div>
+      ) : null}
       <div className="LogoutButtonDiv">
         {isSession ? (
           <button className="LogoutButton" onClick={handleLogout}>
