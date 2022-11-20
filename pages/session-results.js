@@ -15,7 +15,7 @@ export default function SessionResults() {
     var parsedData = JSON.parse(e.data);
 
     if (parsedData.respond_id === 4888 && parsedData.status_code === 200) {
-      window.location.href = "http://centralisbackend.elcexercise.org:8898/downloadFile/" + sessionID;
+      window.location.href = "http://centralisbackend.elcexercise.org/downloadFile/" + sessionID;
     }
   };
 
